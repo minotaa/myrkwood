@@ -1,0 +1,138 @@
+[gd_scene load_steps=9 format=3 uid="uid://fo1x20ewfiw8"]
+
+[ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
+[ext_resource type="FontFile" uid="uid://3v8et71bd5pm" path="res://assets/fonts/BitPotionExt.ttf" id="2_aoy5q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qd3wb"]
+font = ExtResource("1_2ey2a")
+font_size = 64
+
+[sub_resource type="FontVariation" id="FontVariation_da2hc"]
+base_font = ExtResource("1_2ey2a")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71kic"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aaem2"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_melst"]
+font = ExtResource("2_aoy5q")
+font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a11u7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[node name="Game" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Main" type="Control" parent="UI"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -360.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 137.0
+grow_horizontal = 2
+text = "Mirkwood"
+label_settings = SubResource("LabelSettings_qd3wb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level" type="RichTextLabel" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -488.0
+offset_right = 360.0
+offset_bottom = -447.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_2ey2a")
+theme_override_fonts/italics_font = SubResource("FontVariation_da2hc")
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "umm :3"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = 172.0
+offset_right = 324.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aaem2")
+value = 100.0
+show_percentage = false
+
+[node name="HP" type="Label" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.0
+offset_top = 163.0
+offset_right = -245.0
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HP"
+label_settings = SubResource("LabelSettings_melst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -426.08
+offset_right = 320.0
+offset_bottom = 154.08
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a11u7")

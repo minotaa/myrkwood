@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=17 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
 [ext_resource type="FontFile" uid="uid://3v8et71bd5pm" path="res://assets/fonts/BitPotionExt.ttf" id="2_aoy5q"]
 [ext_resource type="Shader" path="res://scripts/damage.gdshader" id="3_7aose"]
 [ext_resource type="Texture2D" uid="uid://dfnw8b72tw8c1" path="res://assets/sprites/baubles.png" id="4_hrrcl"]
+[ext_resource type="Texture2D" uid="uid://cep5ej2435hik" path="res://assets/minota.png" id="5_mm37a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qd3wb"]
 font = ExtResource("1_2ey2a")
@@ -39,11 +40,28 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(1, 1, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxdvm"]
+shader = ExtResource("3_7aose")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 20.0
+shader_parameter/frequecy = 50.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ye0pf"]
 shader = ExtResource("3_7aose")
 shader_parameter/shock_color = Color(1, 0, 0, 1)
 shader_parameter/amplitude = 10.0
 shader_parameter/frequecy = 10.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7ekf"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_max = 35.0
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 8.0
 
 [node name="Game" type="Node2D"]
 
@@ -83,9 +101,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -320.0
-offset_top = -632.0
+offset_top = -656.0
 offset_right = 320.0
-offset_bottom = -580.0
+offset_bottom = -604.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_2ey2a")
@@ -109,10 +127,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -185.0
-offset_top = 180.0
+offset_left = -168.0
+offset_top = 92.0
 offset_right = 344.0
-offset_bottom = 216.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
@@ -128,10 +146,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = 229.0
+offset_left = -168.0
+offset_top = 141.0
 offset_right = 344.0
-offset_bottom = 265.0
+offset_bottom = 177.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
@@ -147,9 +165,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
-offset_top = 168.0
+offset_top = 80.0
 offset_right = -192.0
-offset_bottom = 224.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100/100"
@@ -165,9 +183,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 16.0
-offset_top = 168.0
+offset_top = 80.0
 offset_right = 152.0
-offset_bottom = 224.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "HP"
@@ -183,9 +201,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
-offset_top = 216.0
+offset_top = 128.0
 offset_right = -192.0
-offset_bottom = 272.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100/100"
@@ -201,9 +219,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 16.0
-offset_top = 216.0
+offset_top = 128.0
 offset_right = 152.0
-offset_bottom = 272.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MP"
@@ -221,14 +239,40 @@ anchor_bottom = 0.5
 offset_left = -344.0
 offset_top = -576.0
 offset_right = 344.0
-offset_bottom = 154.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a11u7")
 
+[node name="TextureRect" type="TextureRect" parent="UI/Main"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qxdvm")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -540.0
+offset_right = 288.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hrrcl")
+
 [node name="Enemy" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_ye0pf")
 position = Vector2(360, 396)
 scale = Vector2(15, 13.959)
 texture = ExtResource("4_hrrcl")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(360, 384)
+scale = Vector2(10, 10)
+process_material = SubResource("ParticleProcessMaterial_v7ekf")
+texture = ExtResource("5_mm37a")

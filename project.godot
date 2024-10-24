@@ -16,7 +16,11 @@ config/version="0.0.1"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="res://assets/sprites/icon.png"
+
+[autoload]
+
+Game="*res://scripts/game.gd"
 
 [display]
 

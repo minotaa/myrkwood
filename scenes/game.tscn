@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=21 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
+[ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
+[ext_resource type="Script" path="res://scripts/battle_ui.gd" id="2_06lu2"]
 [ext_resource type="FontFile" uid="uid://3v8et71bd5pm" path="res://assets/fonts/BitPotionExt.ttf" id="2_aoy5q"]
-[ext_resource type="Shader" path="res://scripts/damage.gdshader" id="3_7aose"]
-[ext_resource type="Texture2D" uid="uid://dfnw8b72tw8c1" path="res://assets/sprites/baubles.png" id="4_hrrcl"]
 [ext_resource type="Texture2D" uid="uid://cep5ej2435hik" path="res://assets/minota.png" id="5_mm37a"]
+[ext_resource type="Shader" path="res://scripts/melt.gdshader" id="5_wwnh4"]
+[ext_resource type="Texture2D" uid="uid://bnxw0e4ir0pg" path="res://assets/sprites/slime.png" id="6_v2rec"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="7_lmkk5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qd3wb"]
 font = ExtResource("1_2ey2a")
@@ -40,17 +43,18 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxdvm"]
-shader = ExtResource("3_7aose")
-shader_parameter/shock_color = Color(1, 0, 0, 1)
-shader_parameter/amplitude = 20.0
-shader_parameter/frequecy = 50.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c73m3"]
+shader = ExtResource("5_wwnh4")
+shader_parameter/progress = 0.0
+shader_parameter/meltiness = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ye0pf"]
-shader = ExtResource("3_7aose")
-shader_parameter/shock_color = Color(1, 0, 0, 1)
-shader_parameter/amplitude = 10.0
-shader_parameter/frequecy = 10.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr28y"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.737193, 0.737193, 0.737193, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7ekf"]
 particle_flag_disable_z = true
@@ -63,7 +67,10 @@ gravity = Vector3(0, 98, 0)
 scale_min = 5.0
 scale_max = 8.0
 
-[node name="Game" type="Node2D"]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_wto6v"]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_ogh5i")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -75,6 +82,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_06lu2")
 
 [node name="Title" type="Label" parent="UI/Main"]
 visible = false
@@ -101,9 +109,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -320.0
-offset_top = -656.0
+offset_top = -624.0
 offset_right = 320.0
-offset_bottom = -604.0
+offset_bottom = -572.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_2ey2a")
@@ -128,9 +136,28 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -168.0
-offset_top = 92.0
-offset_right = 344.0
-offset_bottom = 128.0
+offset_top = 124.0
+offset_right = 312.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aaem2")
+value = 100.0
+show_percentage = false
+
+[node name="EnemyHealthProgressBar" type="ProgressBar" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = 30.0
+offset_right = 240.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
@@ -147,9 +174,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -168.0
-offset_top = 141.0
-offset_right = 344.0
-offset_bottom = 177.0
+offset_top = 173.0
+offset_right = 312.0
+offset_bottom = 209.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_71kic")
@@ -165,12 +192,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
-offset_top = 80.0
+offset_top = 112.0
 offset_right = -192.0
-offset_bottom = 136.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "100/100"
+text = "April growing the hugest fattest pair of bouncing gazongas you've ever seen in your life and just straight flip flopping them all over the place:
+"
 label_settings = SubResource("LabelSettings_melst")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -182,10 +210,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = 80.0
-offset_right = 152.0
-offset_bottom = 136.0
+offset_top = 112.0
+offset_right = 136.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "HP"
@@ -201,9 +228,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
-offset_top = 128.0
+offset_top = 160.0
 offset_right = -192.0
-offset_bottom = 184.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100/100"
@@ -218,10 +245,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = 128.0
-offset_right = 152.0
-offset_bottom = 184.0
+offset_top = 160.0
+offset_right = 136.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MP"
@@ -236,43 +262,72 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -344.0
-offset_top = -576.0
-offset_right = 344.0
-offset_bottom = 64.0
+offset_left = -328.0
+offset_top = -544.0
+offset_right = 312.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a11u7")
 
-[node name="TextureRect" type="TextureRect" parent="UI/Main"]
+[node name="EnemyTexture" type="TextureRect" parent="UI/Main/Panel"]
 texture_filter = 1
-material = SubResource("ShaderMaterial_qxdvm")
+material = SubResource("ShaderMaterial_c73m3")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -296.0
-offset_top = -540.0
-offset_right = 288.0
-offset_bottom = 44.0
+offset_left = -248.0
+offset_top = -264.0
+offset_right = 264.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_hrrcl")
+texture = ExtResource("6_v2rec")
 
-[node name="Enemy" type="Sprite2D" parent="."]
+[node name="EnemyOutline" type="Panel" parent="UI/Main"]
 visible = false
-texture_filter = 1
-material = SubResource("ShaderMaterial_ye0pf")
-position = Vector2(360, 396)
-scale = Vector2(15, 13.959)
-texture = ExtResource("4_hrrcl")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -464.0
+offset_right = 248.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tr28y")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
 texture_filter = 1
 position = Vector2(360, 384)
 scale = Vector2(10, 10)
-process_material = SubResource("ParticleProcessMaterial_v7ekf")
 texture = ExtResource("5_mm37a")
+process_material = SubResource("ParticleProcessMaterial_v7ekf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("7_lmkk5")
+
+[node name="PlayerTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="EnemyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MiscTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wto6v")
+
+[connection signal="mouse_entered" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_exited"]
+[connection signal="timeout" from="PlayerTimer" to="." method="_on_player_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="MiscTimer" to="." method="_on_misc_timer_timeout"]

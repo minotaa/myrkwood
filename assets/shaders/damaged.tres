@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b31ueoc1cfy2w"]
+
+[ext_resource type="Shader" path="res://scripts/damage.gdshader" id="1_o2v5f"]
+
+[resource]
+shader = ExtResource("1_o2v5f")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 20.0
+shader_parameter/frequecy = 50.0

@@ -1,9 +1,9 @@
 extends Node2D
 
 var max_health: float = Game.get_max_health()
-var magic: float = 100.0
+var magic: float = Game.magic
 var max_magic: float = Game.get_max_magic()
-var attack: float = 25.0
+var attack: float = Game.get_attack()
 var defense: float = Game.get_defense()
 
 var enemy_max_health: float = 100.0
@@ -12,31 +12,41 @@ var enemy_attack: float = 10.0
 var enemy_defense: float = 10.0
 
 var enemy_attack_speed: float = 1.0
-var attack_speed: float = 1.0
+var attack_speed: float = Game.get_attack_speed()
 # Effective_Health = Health * (1 + Defense / 100)
 
 var enemy: Enemy
 
+var player_alive = true
 var enemy_alive = true
 var melt = false
 var damaged_shader: ShaderMaterial = preload("res://assets/shaders/damaged.tres")
+
 func _ready() -> void:
-	enemy = Enemies.get_random_enemy(0.0, "forest")
+	start_battle()
+	#$UI/Main/EnemyTexture.material = null
+	#$UI/Main.shake(0.5, 10.0)
+	
+func start_battle() -> void:
+	player_alive = true
+	melt = false
+	enemy_alive = true
+	enemy = Game.live_enemy_list.pop_front()
 	enemy_health = enemy.health
 	enemy_max_health = enemy.health
 	enemy_attack = enemy.attack
 	enemy_defense = enemy.defense
 	enemy_attack_speed = enemy.attack_speed
+	$UI/Main/Level.text = Game.game_level.name
 	$UI/Main/Panel/EnemyTexture.texture = enemy.texture
 	$UI/Main/Panel/EnemyTexture.material.set_shader_parameter("progress", 0.0)
 	$AudioStreamPlayer.play()
 	print("battle started:")
 	print("enemy: " + str(enemy))
 	print("your hp right now: " + str(Game.health))
-	#$UI/Main/EnemyTexture.material = null
-	#$UI/Main.shake(0.5, 10.0)
 	
 func _process(delta: float) -> void:
+	
 	$UI/Main/EnemyHealthProgressBar.max_value = enemy_max_health
 	$UI/Main/EnemyHealthProgressBar.value = enemy_health
 	$UI/Main/HealthProgressBar.max_value = max_health
@@ -45,10 +55,13 @@ func _process(delta: float) -> void:
 	$UI/Main/MagicProgressBar.max_value = max_magic
 	$PlayerTimer.wait_time = attack_speed
 	$EnemyTimer.wait_time = enemy_attack_speed
+	$UI/Main/LevelText.text = str(Game.cached_enemy_list.size() - Game.live_enemy_list.size()) + "/" + str(Game.cached_enemy_list.size())
 	$UI/Main/HP.text = str(round(Game.health)) + "/" + str(round(max_health))
 	$UI/Main/MP.text = str(round(magic)) + "/" + str(round(max_magic))
-	if melt and $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") < 1:
+	if melt and $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") <= 1:
 		$UI/Main/Panel/EnemyTexture.material.set_shader_parameter("progress", $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") + 0.45 * delta)
+	if $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") >= 1 and not player_alive:
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
 		
 func attack_enemy() -> void:
 	if not enemy_alive:
@@ -61,11 +74,14 @@ func attack_enemy() -> void:
 		enemy_alive = false
 		melt = true
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/explosion.wav"))
-		await get_tree().create_timer(1.25).timeout
+		await get_tree().create_timer(2.15).timeout
 		print("you won!")
-		get_tree().change_scene_to_file("res://scenes/overworld.tscn")
+		if not Game.live_enemy_list.is_empty():
+			start_battle()
 		#$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/victory.mp3"))
-	
+
+var dead = preload("res://assets/sprites/bad.png")
+
 func attack_player() -> void:
 	if not enemy_alive:
 		return
@@ -73,8 +89,30 @@ func attack_player() -> void:
 	var damage_taken = enemy_attack * damage_multiplier
 	Game.health -= damage_taken
 	if Game.health <= 0:
-		pass
-
+		enemy_alive = false
+		$UI/Main/Panel/EnemyTexture.texture = dead
+		$UI/Main/LevelText.visible = false
+		$UI/Main/Level.visible = false
+		$UI/Main/HP.visible = false
+		$UI/Main/HP2.visible = false
+		$UI/Main/MP.visible = false
+		$UI/Main/MP2.visible = false
+		$UI/Main/HealthProgressBar.visible = false
+		$UI/Main/MagicProgressBar.visible = false
+		$UI/Main/EnemyHealthProgressBar.visible = false
+		var messages = [
+			"You were never found.", 
+			"You went off the straight path.", 
+			"Your life ended in the forest.", 
+			"You died in the forest, your adventure is done.",
+			"Your body was never found."
+		]
+		$UI/Main/Title.text = messages.pick_random()
+		$UI/Main/Title.visible = true
+		await get_tree().create_timer(3.25).timeout
+		melt = true
+		player_alive = false
+		
 func _on_player_timer_timeout() -> void:
 	attack_enemy()
 

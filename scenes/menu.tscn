@@ -1,0 +1,266 @@
+[gd_scene load_steps=21 format=3 uid="uid://c5b4j7qffxpbv"]
+
+[ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_x0qtr"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_ymrvc"]
+[ext_resource type="Texture2D" uid="uid://co77hc7k66ah5" path="res://assets/sprites/c1.png" id="2_x50tw"]
+[ext_resource type="Texture2D" uid="uid://drak28auqno4t" path="res://assets/sprites/c2.png" id="3_ibaf3"]
+[ext_resource type="Texture2D" uid="uid://bhljkb51mn0of" path="res://assets/sprites/c3.png" id="4_c7w70"]
+[ext_resource type="Texture2D" uid="uid://c7ub8fs3lrivp" path="res://assets/sprites/c4.png" id="5_bppoq"]
+[ext_resource type="Texture2D" uid="uid://dhxet74lst4h8" path="res://assets/sprites/c5.png" id="6_0u63j"]
+[ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="8_eelid"]
+
+[sub_resource type="FontVariation" id="FontVariation_loxei"]
+base_font = ExtResource("1_x0qtr")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fjaw"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_qep5d"]
+frames = 5
+frame_0/texture = ExtResource("2_x50tw")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("3_ibaf3")
+frame_1/duration = 0.25
+frame_2/texture = ExtResource("4_c7w70")
+frame_2/duration = 0.25
+frame_3/texture = ExtResource("5_bppoq")
+frame_3/duration = 0.25
+frame_4/texture = ExtResource("6_0u63j")
+frame_4/duration = 0.25
+
+[sub_resource type="LabelSettings" id="LabelSettings_etsk1"]
+line_spacing = 14.0
+font = ExtResource("8_eelid")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dpst"]
+bg_color = Color(0.162066, 0.162066, 0.162065, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvbav"]
+bg_color = Color(0.389863, 0.830616, 0.949648, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0el36"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p784s"]
+content_margin_left = 6.0
+content_margin_top = 0.0
+content_margin_right = 6.0
+bg_color = Color(0.262932, 0.262932, 0.262932, 1)
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ob78k"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10ldw"]
+content_margin_left = 10.0
+content_margin_top = 12.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g4it"]
+content_margin_left = 10.0
+content_margin_top = 12.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.188969, 0.188969, 0.188969, 1)
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twohf"]
+content_margin_left = 10.0
+content_margin_top = 12.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[node name="Menu" type="Node2D"]
+position = Vector2(0, 32)
+script = ExtResource("1_ymrvc")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Main" type="Control" parent="UI"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="RichTextLabel" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -600.0
+offset_right = 312.0
+offset_bottom = -498.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_x0qtr")
+theme_override_fonts/italics_font = SubResource("FontVariation_loxei")
+theme_override_font_sizes/bold_italics_font_size = 72
+theme_override_font_sizes/italics_font_size = 72
+theme_override_font_sizes/mono_font_size = 72
+theme_override_font_sizes/normal_font_size = 72
+theme_override_font_sizes/bold_font_size = 72
+bbcode_enabled = true
+text = "Mirkwood"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -336.0
+offset_top = -512.0
+offset_right = 336.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1fjaw")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -464.0
+offset_right = -168.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_qep5d")
+
+[node name="Meta" type="Label" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -464.0
+offset_right = 296.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level: 0
+Health: 0
+Attack: 0
+Defense: 0
+Intelligence: 0"
+label_settings = SubResource("LabelSettings_etsk1")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -446.0
+offset_right = 194.0
+offset_bottom = -414.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0dpst")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jvbav")
+show_percentage = false
+
+[node name="TabContainer" type="TabContainer" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -336.0
+offset_top = -144.0
+offset_right = 336.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/side_margin = 8
+theme_override_fonts/font = ExtResource("8_eelid")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_0el36")
+theme_override_styles/tab_disabled = SubResource("StyleBoxFlat_p784s")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ob78k")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_10ldw")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_2g4it")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_twohf")
+tab_alignment = 1
+current_tab = 0
+
+[node name="Levels" type="Control" parent="UI/Main/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Main/TabContainer/Levels"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Main/TabContainer/Levels/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Loadout" type="Control" parent="UI/Main/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Crafting" type="Control" parent="UI/Main/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

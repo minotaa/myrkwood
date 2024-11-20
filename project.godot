@@ -13,15 +13,18 @@ config_version=5
 config/name="Mirkwood"
 config/description="A little trip down the path"
 config/version="0.0.1"
-run/main_scene="res://scenes/overworld.tscn"
+run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
 config/icon="res://assets/sprites/icon.png"
 
 [autoload]
 
 Game="*res://scripts/game.gd"
 Enemies="*res://scripts/enemies.gd"
+Levels="*res://scripts/levels.gd"
 
 [display]
 

@@ -12,6 +12,7 @@ var defense: float = 10.0
 var attack_speed: float = 1.0
 var attack: float = 10.0
 
+var exp: float = 0.0
 var location: String = "forest"
 
 func on_attack() -> void:

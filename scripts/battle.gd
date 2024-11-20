@@ -23,6 +23,8 @@ var melt = false
 var damaged_shader: ShaderMaterial = preload("res://assets/shaders/damaged.tres")
 
 func _ready() -> void:
+	Game.temp_exp_gained = 0.0
+	Game.temp_drops_gained = []
 	start_battle()
 	#$UI/Main/EnemyTexture.material = null
 	#$UI/Main.shake(0.5, 10.0)
@@ -40,6 +42,12 @@ func start_battle() -> void:
 	$UI/Main/Level.text = Game.game_level.name
 	$UI/Main/Panel/EnemyTexture.texture = enemy.texture
 	$UI/Main/Panel/EnemyTexture.material.set_shader_parameter("progress", 0.0)
+	$PlayerTimer.stop()
+	$PlayerTimer.start()
+	$MagicTimer.stop()
+	$MagicTimer.start()
+	$EnemyTimer.stop()
+	$EnemyTimer.start()
 	$AudioStreamPlayer.play()
 	print("battle started:")
 	print("enemy: " + str(enemy))
@@ -74,10 +82,28 @@ func attack_enemy() -> void:
 		enemy_alive = false
 		melt = true
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/explosion.wav"))
+		Game.exp += enemy.exp
+		Game.temp_exp_gained += enemy.exp
 		await get_tree().create_timer(2.15).timeout
 		print("you won!")
 		if not Game.live_enemy_list.is_empty():
 			start_battle()
+		else:
+			if Game.highest_completed_level < Game.game_level.id:
+				Game.highest_completed_level = Game.game_level.id + 1
+			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(round(Game.temp_exp_gained)) + " XP\nYou also gained +69 items."
+			$UI/Main/YouWin.visible = true
+			$UI/Main/LevelText.visible = false
+			$UI/Main/Level.visible = false
+			$UI/Main/HP.visible = false
+			$UI/Main/HP2.visible = false
+			$UI/Main/MP.visible = false
+			$UI/Main/MP2.visible = false
+			$UI/Main/HealthProgressBar.visible = false
+			$UI/Main/MagicProgressBar.visible = false
+			$UI/Main/EnemyHealthProgressBar.visible = false
+			await get_tree().create_timer(3.25).timeout
+			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 		#$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/victory.mp3"))
 
 var dead = preload("res://assets/sprites/bad.png")
@@ -107,8 +133,8 @@ func attack_player() -> void:
 			"You died in the forest, your adventure is done.",
 			"Your body was never found."
 		]
-		$UI/Main/Title.text = messages.pick_random()
-		$UI/Main/Title.visible = true
+		$UI/Main/GameOver.text = messages.pick_random()
+		$UI/Main/GameOver.visible = true
 		await get_tree().create_timer(3.25).timeout
 		melt = true
 		player_alive = false

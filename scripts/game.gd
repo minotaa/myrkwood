@@ -4,23 +4,87 @@ var did_the_game_load_yet_also_big_boobs: bool = false
 
 var health: float = 100.0
 var magic: float = 100.0
-var exp: float = 0.0
 
-var inventory = []
+var exp: float = 0.0
+var temp_exp_gained: float = 0.0
+var temp_drops_gained = []
+
+var equipment = []
 var drops = []
 var game_level: Level
 var cached_enemy_list = []
 var live_enemy_list = []
 var highest_completed_level: int = 0
 
+func load_game():
+	if did_the_game_load_yet_also_big_boobs == true:
+		return
+	if not FileAccess.file_exists("user://game.april"):
+		return
+	var save_file = FileAccess.open("user://game.april", FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+		var data = json.get_data()
+		if data.has("exp"):
+			exp = data["exp"]
+		if data.has("highest_completed_level"):
+			highest_completed_level = data["highest_completed_level"]
+		if data.has("equipment"):
+			Inventories.equipment.set_list_from_save(data["equipment"])
+		if data.has("drops"):
+			Inventories.drops.set_list_from_save(data["drops"])
+			
+	print("Loaded the game.")
+	did_the_game_load_yet_also_big_boobs = true
+	
+func get_game_save_data() -> Dictionary:
+	return {
+		"highest_completed_level": highest_completed_level,
+		"exp": exp,
+		"equipment": equipment,
+		"drops": drops
+	}
+	
+func save_game(_data: Dictionary, reason: String):
+	var save_file = FileAccess.open("user://game.april", FileAccess.WRITE)
+	save_file.store_line(JSON.stringify(get_game_save_data()))
+	print("Saved the game. " + "(" + reason + ")")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+		save_game(get_game_save_data(), "went to background")
+
 func _ready() -> void:
-	pass
+	load_game()
 
 func get_attack_speed() -> float:
-	return 1.0
+	var attack_speed = 1.0
+	return attack_speed
 
 func get_attack() -> float:
-	return 25.0
+	var attack = 25.0
+	attack += 2 * get_level()
+	return attack
+	
+func get_max_health() -> float:
+	var max_health = 100.0
+	max_health += 10 * get_level()
+	return max_health
+
+func get_max_magic() -> float:
+	var max_magic = 100.0
+	max_magic += 1 * get_level()
+	return max_magic
+
+func get_defense() -> float:
+	var defense = 10.0
+	defense += 3 * get_level()
+	return defense
 
 func get_level() -> int: 
 	var file = FileAccess.open("res://scripts/levels.json", FileAccess.READ)
@@ -57,12 +121,3 @@ func get_progress() -> int:
 		progress = float(exp - current_xp) / float(next_xp - current_xp) * 100
 
 	return int(clamp(progress, 0, 100))
-
-func get_max_health() -> float:
-	return 100.0
-
-func get_max_magic() -> float:
-	return 100.0
-
-func get_defense() -> float:
-	return 10.0

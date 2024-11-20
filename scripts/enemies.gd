@@ -33,9 +33,10 @@ func _ready() -> void:
 	baubles.description = "Colorful Christmas ornamental balls, they've sprouted wings and now want to wreak havoc."
 	baubles.weight = 20.0
 	baubles.health = 50.0
-	baubles.attack_speed = 0.5
+	baubles.attack_speed = 1.35
 	baubles.attack = 8.0
 	baubles.defense = 3.0
+	baubles.exp = 7.5
 	baubles.texture = load("res://assets/sprites/baubles.png")
 	enemies.append(baubles)
 	
@@ -44,9 +45,10 @@ func _ready() -> void:
 	slime.name = "Slime"
 	slime.description = "A viscous, sticky blob of a hungry being that would rather just eat you."
 	slime.weight = 30.0
-	slime.health = 100.0
+	slime.health = 75.0
 	slime.attack_speed = 1.0
-	slime.attack = 10.0
+	slime.attack = 20.0
 	slime.defense = 1.0
+	slime.exp = 10.0
 	slime.texture = load("res://assets/sprites/slime.png")
 	enemies.append(slime)

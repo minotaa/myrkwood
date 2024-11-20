@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=23 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
@@ -60,6 +60,11 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0.737193, 0.737193, 0.737193, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_pecp7"]
+line_spacing = 12.0
+font = ExtResource("4_ply01")
+font_size = 48
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7ekf"]
 particle_flag_disable_z = true
 angle_min = 1.07288e-05
@@ -120,7 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_v2rec")
 
-[node name="Title" type="Label" parent="UI/Main"]
+[node name="GameOver" type="Label" parent="UI/Main"]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -326,6 +331,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tr28y")
 
+[node name="YouWin" type="Label" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -448.0
+offset_right = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN!
+
+You gained +69 XP
+You also gained +69 items. "
+label_settings = SubResource("LabelSettings_pecp7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
 texture_filter = 1
@@ -338,10 +365,12 @@ process_material = SubResource("ParticleProcessMaterial_v7ekf")
 script = ExtResource("7_lmkk5")
 
 [node name="PlayerTimer" type="Timer" parent="."]
+process_callback = 0
 autostart = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
 process_priority = 1
+process_callback = 0
 autostart = true
 
 [node name="MagicTimer" type="Timer" parent="."]

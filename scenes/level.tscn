@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://decl6d8bbvaft"]
 
-[ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="1_v3528"]
+[ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_w7c3h"]
 [ext_resource type="Script" path="res://scripts/level_button.gd" id="2_dvimu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi1b0"]
@@ -46,8 +46,8 @@ anchor_bottom = 0.1
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_v3528")
-theme_override_font_sizes/font_size = 34
+theme_override_fonts/font = ExtResource("1_w7c3h")
+theme_override_font_sizes/font_size = 51
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mi1b0")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_1eml1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jmobi")

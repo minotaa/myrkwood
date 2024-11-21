@@ -39,6 +39,14 @@ func _ready() -> void:
 	baubles.exp = 5.0
 	baubles.texture = load("res://assets/sprites/baubles.png")
 	baubles.on_die = func ():
+		ToastParty.show({
+			"text": "You also got a Glass Shard!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
 		Game.temp_drops_gained.append(Items.get_item_by_id(3))
 	enemies.append(baubles)
 	
@@ -54,6 +62,14 @@ func _ready() -> void:
 	slime.exp = 15.0
 	slime.texture = load("res://assets/sprites/slime.png")
 	slime.on_die = func ():
+		ToastParty.show({
+			"text": "You also got Goop!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
 		Game.temp_drops_gained.append(Items.get_item_by_id(2))
 	enemies.append(slime)
 	print("enemies added")

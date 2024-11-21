@@ -5,6 +5,11 @@ var locked = preload("res://assets/sprites/locked.png")
 var dead = preload("res://assets/sprites/bad.png")
 
 func _ready() -> void:
+	refresh_menu()
+	
+func refresh_menu() -> void:
+	for children in $UI/Main/TabContainer/Levels/ScrollContainer/VBoxContainer.get_children():
+		children.queue_free()
 	for i in range(0, Game.highest_completed_level + 2):
 		var level_button = level_object.instantiate()
 		var game_level = Levels.get_by_id(i)
@@ -18,9 +23,7 @@ func _ready() -> void:
 			level_button.text = game_level.name
 			level_button.level = game_level
 		$UI/Main/TabContainer/Levels/ScrollContainer/VBoxContainer.add_child(level_button)
-	refresh_menu()
 	
-func refresh_menu() -> void:
 	var meta: String = "Level: " + str(roundi(Game.get_level()))
 	meta += "\nHealth: " + str(roundi(Game.get_max_health()))
 	meta += "\nAttack: " + str(roundi(Game.get_attack()))
@@ -39,6 +42,42 @@ func refresh_menu() -> void:
 		$UI/Main/TabContainer/Loadout/Armor/Name.text = Inventories.equipment.armor.name
 		$UI/Main/TabContainer/Loadout/Armor/Description.text = Inventories.equipment.armor.description
 	
+	check_craftable_items()
 
-func _process(delta: float) -> void:
+
+
+func check_craftable_items() -> void:
+	for children in $UI/Main/TabContainer/Crafting/ScrollContainer/VBoxContainer.get_children():
+		children.queue_free()
+	for item in Items.items:
+		if item.craftable:
+			var can_view = true
+			var can_craft = true
+			# Check min_requirement to allow viewing
+			for req in item.min_requirement:
+				var found = false
+				for inv_item in Inventories.drops.list:
+					if inv_item.type.id == req.type.id and inv_item.amount >= req.amount:
+						found = true
+						break
+				if not found:
+					can_view = false
+					break
+			# Check requirement to allow crafting
+			for req in item.requirement:
+				var found = false
+				for inv_item in Inventories.drops.list:
+					if inv_item.type.id == req.type.id and inv_item.amount >= req.amount:
+						found = true
+						break
+				if not found:
+					can_craft = false
+					break
+			if can_view:
+				var button = load("res://scenes/crafting_item.tscn").instantiate()
+				button.item = item
+				button.can_craft = can_craft
+				$UI/Main/TabContainer/Crafting/ScrollContainer/VBoxContainer.add_child(button)
+
+func _on_tab_container_tab_selected(tab: int) -> void:
 	refresh_menu()

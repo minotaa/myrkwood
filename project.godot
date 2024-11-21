@@ -24,6 +24,7 @@ config/icon="res://assets/sprites/icon.png"
 
 Items="*res://scripts/items.gd"
 Inventories="*res://scripts/inventories.gd"
+ToastParty="*res://addons/toastparty/toast-autoload.gd"
 Enemies="*res://scripts/enemies.gd"
 Levels="*res://scripts/levels.gd"
 Game="*res://scripts/game.gd"
@@ -35,6 +36,10 @@ window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/toastparty/plugin.cfg")
 
 [input_devices]
 

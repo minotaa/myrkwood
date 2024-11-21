@@ -84,9 +84,18 @@ func attack_enemy() -> void:
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/explosion.wav"))
 		Game.exp += enemy.exp
 		Game.temp_exp_gained += enemy.exp
-		enemy.on_die.call()
+		ToastParty.show({
+			"text": "You got " + str(roundi(enemy.exp)) + " XP from this fight!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
 		print(Game.temp_drops_gained)
-		await get_tree().create_timer(2.15).timeout
+		await get_tree().create_timer(0.15).timeout
+		enemy.on_die.call()
+		await get_tree().create_timer(2.0).timeout
 		print("you won!")
 		if not Game.live_enemy_list.is_empty():
 			start_battle()
@@ -100,7 +109,7 @@ func attack_enemy() -> void:
 			if Game.highest_completed_level <= Game.game_level.id:
 				Game.highest_completed_level = Game.game_level.id + 1
 			print("added " + str(roundi(Game.temp_exp_gained)) + " xp and " + str(Game.temp_drops_gained.size()) + " items")
-			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(roundi(Game.temp_exp_gained)) + " XP\nYou also gained +" + str(Game.temp_drops_gained.size()) + " items."
+			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(roundi(Game.temp_exp_gained)) + " XP\nYou also got +" + str(Game.temp_drops_gained.size()) + " items."
 			$UI/Main/YouWin.visible = true
 			$UI/Main/LevelText.visible = false
 			$UI/Main/Level.visible = false

@@ -1,34 +1,78 @@
-[gd_scene load_steps=6 format=3 uid="uid://dagg2b75awus6"]
+[gd_scene load_steps=12 format=3 uid="uid://dagg2b75awus6"]
 
-[ext_resource type="PackedScene" uid="uid://decl6d8bbvaft" path="res://scenes/level.tscn" id="1_b6u4r"]
-[ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="2_wkp4j"]
+[ext_resource type="Script" path="res://scripts/craft_button.gd" id="1_e3jf6"]
+[ext_resource type="Texture2D" uid="uid://d0mmrbctam71x" path="res://assets/sprites/items.png" id="2_e3jf6"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="3_e3jf6"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wkp4j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3jf6"]
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1uy60"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fe82e"]
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kq80b"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uy60"]
+atlas = ExtResource("2_e3jf6")
+region = Rect2(32, 0, 16, 16)
+
 [sub_resource type="LabelSettings" id="LabelSettings_1uy60"]
-font = ExtResource("2_wkp4j")
-font_size = 34
+font = ExtResource("3_e3jf6")
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_fe82e"]
 font = ExtResource("3_e3jf6")
+font_size = 24
 
 [node name="crafting_item" type="Control"]
 texture_filter = 1
+custom_minimum_size = Vector2(624, 128)
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.1
+offset_right = -96.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_e3jf6")
 
-[node name="Button" parent="." instance=ExtResource("1_b6u4r")]
-custom_minimum_size = Vector2(720, 128)
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 720.0
-offset_bottom = 144.0
-grow_horizontal = 1
-grow_vertical = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wkp4j")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_e3jf6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1uy60")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fe82e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kq80b")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -37,41 +81,37 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 16.0
 offset_top = -48.0
-offset_right = 128.0
-offset_bottom = 64.0
+offset_right = 120.0
+offset_bottom = 48.0
 grow_vertical = 2
+texture = SubResource("AtlasTexture_1uy60")
 
 [node name="Name" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -46.0
-offset_right = 344.0
-offset_bottom = -10.0
-grow_horizontal = 2
+offset_left = 130.0
+offset_top = -43.0
+offset_right = 578.0
+offset_bottom = -16.0
 grow_vertical = 2
 text = "Wooden Sword"
 label_settings = SubResource("LabelSettings_1uy60")
+vertical_alignment = 1
 
 [node name="Requirements" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -194.0
-offset_top = -10.0
-offset_right = 345.0
-offset_bottom = 64.0
-grow_horizontal = 2
+offset_left = 129.0
+offset_top = -8.0
+offset_right = 608.0
+offset_bottom = 44.0
 grow_vertical = 2
-text = "Requirements"
+text = "oye shorty dime que lo que tu quiere fuerte"
 label_settings = SubResource("LabelSettings_fe82e")
 autowrap_mode = 2

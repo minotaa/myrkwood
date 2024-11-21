@@ -20,6 +20,17 @@ func add_item(item: ItemStack) -> void:
 			return
 	list.append(item)
 
+func has_item(item: ItemType) -> bool:
+	for i in list:
+		if i.type.id == item.type:
+			return true
+	return false
+
+func take_item(item: ItemType) -> void:
+	for i in list:
+		if i.type.id == item.type:
+			i.amount -= 1
+
 func set_list_from_save(_list: Array):
 	for value in _list:
 		var item = ItemStack.new()

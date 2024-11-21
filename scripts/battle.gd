@@ -64,8 +64,8 @@ func _process(delta: float) -> void:
 	$PlayerTimer.wait_time = attack_speed
 	$EnemyTimer.wait_time = enemy_attack_speed
 	$UI/Main/LevelText.text = str(Game.cached_enemy_list.size() - Game.live_enemy_list.size()) + "/" + str(Game.cached_enemy_list.size())
-	$UI/Main/HP.text = str(round(Game.health)) + "/" + str(round(max_health))
-	$UI/Main/MP.text = str(round(magic)) + "/" + str(round(max_magic))
+	$UI/Main/HP.text = str(roundi(Game.health)) + "/" + str(roundi(max_health))
+	$UI/Main/MP.text = str(roundi(magic)) + "/" + str(roundi(max_magic))
 	if melt and $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") <= 1:
 		$UI/Main/Panel/EnemyTexture.material.set_shader_parameter("progress", $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") + 0.45 * delta)
 	if $UI/Main/Panel/EnemyTexture.material.get_shader_parameter("progress") >= 1 and not player_alive:
@@ -84,14 +84,23 @@ func attack_enemy() -> void:
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/explosion.wav"))
 		Game.exp += enemy.exp
 		Game.temp_exp_gained += enemy.exp
+		enemy.on_die.call()
+		print(Game.temp_drops_gained)
 		await get_tree().create_timer(2.15).timeout
 		print("you won!")
 		if not Game.live_enemy_list.is_empty():
 			start_battle()
 		else:
-			if Game.highest_completed_level < Game.game_level.id:
+			for item in Game.temp_drops_gained:
+				var item_stack = ItemStack.new()
+				item_stack.amount = 1
+				item_stack.type = item
+				Inventories.drops.add_item(item_stack)
+		
+			if Game.highest_completed_level <= Game.game_level.id:
 				Game.highest_completed_level = Game.game_level.id + 1
-			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(round(Game.temp_exp_gained)) + " XP\nYou also gained +69 items."
+			print("added " + str(roundi(Game.temp_exp_gained)) + " xp and " + str(Game.temp_drops_gained.size()) + " items")
+			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(roundi(Game.temp_exp_gained)) + " XP\nYou also gained +" + str(Game.temp_drops_gained.size()) + " items."
 			$UI/Main/YouWin.visible = true
 			$UI/Main/LevelText.visible = false
 			$UI/Main/Level.visible = false

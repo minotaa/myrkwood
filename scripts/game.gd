@@ -9,8 +9,6 @@ var exp: float = 0.0
 var temp_exp_gained: float = 0.0
 var temp_drops_gained = []
 
-var equipment = []
-var drops = []
 var game_level: Level
 var cached_enemy_list = []
 var live_enemy_list = []
@@ -20,6 +18,7 @@ func load_game():
 	if did_the_game_load_yet_also_big_boobs == true:
 		return
 	if not FileAccess.file_exists("user://game.april"):
+		did_the_game_load_yet_also_big_boobs = true
 		return
 	var save_file = FileAccess.open("user://game.april", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
@@ -40,17 +39,29 @@ func load_game():
 			Inventories.drops.set_list_from_save(data["drops"])
 		if data.has("equipped_weapon"):
 			Inventories.equipment.weapon = Items.get_item_by_id(data["equipped_weapon"])
+		if data.has("equipped_armor"):
+			Inventories.equipment.armor = Items.get_item_by_id(data["equipped_armor"])
 	
 	print("Loaded the game.")
 	did_the_game_load_yet_also_big_boobs = true
 	
 func get_game_save_data() -> Dictionary:
+	if Inventories.equipment.list.is_empty():
+		var wooden_sword = ItemStack.new()
+		wooden_sword.type = Items.get_item_by_id(0)
+		wooden_sword.amount = 1
+		var hoodie = ItemStack.new()
+		hoodie.type = Items.get_item_by_id(1)
+		hoodie.amount = 1
+		Inventories.equipment.list.append(wooden_sword)
+		Inventories.equipment.list.append(hoodie)
 	return {
 		"highest_completed_level": highest_completed_level,
 		"exp": exp,
 		"equipment": Inventories.equipment.to_list(),
 		"drops": Inventories.drops.to_list(),
-		"equipped_weapon": Inventories.equipment.weapon.id
+		"equipped_weapon": Inventories.equipment.weapon.id,
+		"equipped_armor": Inventories.equipment.armor.id
 	}
 	
 func save_game(_data: Dictionary, reason: String):
@@ -59,7 +70,9 @@ func save_game(_data: Dictionary, reason: String):
 	print("Saved the game. " + "(" + reason + ")")
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+	if not did_the_game_load_yet_also_big_boobs:
+		return
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		save_game(get_game_save_data(), "went to background")
 
 func _ready() -> void:
@@ -71,21 +84,27 @@ func get_attack_speed() -> float:
 
 func get_attack() -> float:
 	var attack = 20.0
+	if Inventories.equipment.weapon != null:
+		attack += Inventories.equipment.weapon.damage
 	return attack
 	
 func get_max_health() -> float:
 	var max_health = 100.0
-	max_health += 10 * get_level()
+	max_health += 5 * get_level()
+	if Inventories.equipment.armor != null:
+		max_health += Inventories.equipment.armor.health 
 	return max_health
 
 func get_max_magic() -> float:
 	var max_magic = 100.0
-	max_magic += 1 * get_level()
+	max_magic += 0.5 * get_level()
 	return max_magic
 
 func get_defense() -> float:
 	var defense = 10.0
-	defense += 3 * get_level()
+	defense += 2 * get_level()
+	if Inventories.equipment.armor != null:
+		defense += Inventories.equipment.armor.defense 
 	return defense
 
 func get_level() -> int: 

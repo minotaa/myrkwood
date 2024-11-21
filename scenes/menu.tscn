@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5b4j7qffxpbv"]
+[gd_scene load_steps=26 format=3 uid="uid://c5b4j7qffxpbv"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_x0qtr"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_ymrvc"]
@@ -100,7 +100,7 @@ expand_margin_right = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfi17"]
 atlas = ExtResource("9_5sulo")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ppsm6"]
 font = ExtResource("1_x0qtr")
@@ -108,7 +108,11 @@ font_size = 51
 
 [sub_resource type="LabelSettings" id="LabelSettings_n8bds"]
 font = ExtResource("8_eelid")
-font_size = 32
+font_size = 24
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6lef"]
+atlas = ExtResource("9_5sulo")
+region = Rect2(16, 0, 16, 16)
 
 [node name="Menu" type="Node2D"]
 position = Vector2(0, 32)
@@ -237,7 +241,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/side_margin = 8
 theme_override_fonts/font = ExtResource("8_eelid")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_0el36")
 theme_override_styles/tab_disabled = SubResource("StyleBoxFlat_p784s")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ob78k")
@@ -245,10 +249,9 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_10ldw")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_2g4it")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_twohf")
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Levels" type="Control" parent="UI/Main/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -271,6 +274,7 @@ theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Loadout" type="Control" parent="UI/Main/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -320,9 +324,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 2.5
-offset_top = -80.0
+offset_top = -70.0
 offset_right = 285.5
-offset_bottom = -28.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Wooden Sword"
@@ -337,15 +341,93 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 8.0
-offset_top = -20.0
+offset_top = -16.0
 offset_right = 424.0
-offset_bottom = 76.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "+5 damage"
+text = "A quick brown fox jumped over the lazy dog."
 label_settings = SubResource("LabelSettings_n8bds")
+autowrap_mode = 2
+
+[node name="Armor" type="Control" parent="UI/Main/TabContainer/Loadout"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -112.0
+offset_right = 24.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Main/TabContainer/Loadout/Armor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.19
+anchor_bottom = 1.0
+offset_right = 224.16
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ob78k")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/TabContainer/Loadout/Armor"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -64.0
+offset_right = 160.0
+offset_bottom = 64.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_i6lef")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="UI/Main/TabContainer/Loadout/Armor"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.5
+offset_top = -70.0
+offset_right = 285.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hoodie"
+label_settings = SubResource("LabelSettings_ppsm6")
+
+[node name="Description" type="Label" parent="UI/Main/TabContainer/Loadout/Armor"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -16.0
+offset_right = 424.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stupid boy"
+label_settings = SubResource("LabelSettings_n8bds")
+autowrap_mode = 2
 
 [node name="Crafting" type="Control" parent="UI/Main/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="Drops" type="Control" parent="UI/Main/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

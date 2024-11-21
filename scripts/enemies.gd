@@ -38,6 +38,8 @@ func _ready() -> void:
 	baubles.defense = 3.0
 	baubles.exp = 5.0
 	baubles.texture = load("res://assets/sprites/baubles.png")
+	baubles.on_die = func ():
+		Game.temp_drops_gained.append(Items.get_item_by_id(3))
 	enemies.append(baubles)
 	
 	var slime = Enemy.new()
@@ -51,4 +53,7 @@ func _ready() -> void:
 	slime.defense = 1.0
 	slime.exp = 15.0
 	slime.texture = load("res://assets/sprites/slime.png")
+	slime.on_die = func ():
+		Game.temp_drops_gained.append(Items.get_item_by_id(2))
 	enemies.append(slime)
+	print("enemies added")

@@ -24,9 +24,9 @@ config/icon="res://assets/sprites/icon.png"
 
 Items="*res://scripts/items.gd"
 Inventories="*res://scripts/inventories.gd"
+Enemies="*res://scripts/enemies.gd"
 Levels="*res://scripts/levels.gd"
 Game="*res://scripts/game.gd"
-Enemies="*res://scripts/enemies.gd"
 
 [display]
 

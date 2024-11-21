@@ -22,3 +22,6 @@ func _ready() -> void:
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_packed(menu)
+
+func _on_feedback_pressed() -> void:
+	OS.shell_open("https://discord.gg/zhz3nnCDDg")

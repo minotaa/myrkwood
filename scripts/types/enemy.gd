@@ -17,9 +17,8 @@ var location: String = "forest"
 
 func on_attack() -> void:
 	pass
-	
-func on_die() -> void:
-	pass
+
+var on_die: Callable
 	
 func on_damage() -> void:
 	pass

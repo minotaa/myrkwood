@@ -18,12 +18,27 @@ func _ready() -> void:
 			level_button.text = game_level.name
 			level_button.level = game_level
 		$UI/Main/TabContainer/Levels/ScrollContainer/VBoxContainer.add_child(level_button)
-
-func _process(delta: float) -> void:
-	var meta: String = "Level: " + str(Game.get_level())
-	meta += "\nHealth: " + str(Game.get_max_health())
-	meta += "\nAttack: " + str(Game.get_attack())
-	meta += "\nDefense: " + str(Game.get_defense())
-	meta += "\nIntelligence: " + str(Game.get_max_magic())
+	refresh_menu()
+	
+func refresh_menu() -> void:
+	var meta: String = "Level: " + str(roundi(Game.get_level()))
+	meta += "\nHealth: " + str(roundi(Game.get_max_health()))
+	meta += "\nAttack: " + str(roundi(Game.get_attack()))
+	meta += "\nDefense: " + str(roundi(Game.get_defense()))
+	meta += "\nIntelligence: " + str(roundi(Game.get_max_magic()))
 	$UI/Main/Meta.text = meta
 	$UI/Main/ProgressBar.value = Game.get_progress()
+	
+	if Inventories.equipment.weapon != null:
+		$UI/Main/TabContainer/Loadout/Weapon/TextureRect.texture = Inventories.equipment.weapon.texture
+		$UI/Main/TabContainer/Loadout/Weapon/Name.text = Inventories.equipment.weapon.name
+		$UI/Main/TabContainer/Loadout/Weapon/Description.text = Inventories.equipment.weapon.description
+	
+	if Inventories.equipment.armor != null:
+		$UI/Main/TabContainer/Loadout/Armor/TextureRect.texture = Inventories.equipment.armor.texture
+		$UI/Main/TabContainer/Loadout/Armor/Name.text = Inventories.equipment.armor.name
+		$UI/Main/TabContainer/Loadout/Armor/Description.text = Inventories.equipment.armor.description
+	
+
+func _process(delta: float) -> void:
+	refresh_menu()

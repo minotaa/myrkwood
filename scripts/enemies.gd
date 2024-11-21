@@ -36,7 +36,7 @@ func _ready() -> void:
 	baubles.attack_speed = 1.35
 	baubles.attack = 8.0
 	baubles.defense = 3.0
-	baubles.exp = 7.5
+	baubles.exp = 5.0
 	baubles.texture = load("res://assets/sprites/baubles.png")
 	enemies.append(baubles)
 	
@@ -49,6 +49,6 @@ func _ready() -> void:
 	slime.attack_speed = 1.0
 	slime.attack = 20.0
 	slime.defense = 1.0
-	slime.exp = 10.0
+	slime.exp = 15.0
 	slime.texture = load("res://assets/sprites/slime.png")
 	enemies.append(slime)

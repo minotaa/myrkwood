@@ -38,7 +38,9 @@ func load_game():
 			Inventories.equipment.set_list_from_save(data["equipment"])
 		if data.has("drops"):
 			Inventories.drops.set_list_from_save(data["drops"])
-			
+		if data.has("equipped_weapon"):
+			Inventories.equipment.weapon = Items.get_item_by_id(data["equipped_weapon"])
+	
 	print("Loaded the game.")
 	did_the_game_load_yet_also_big_boobs = true
 	
@@ -46,8 +48,9 @@ func get_game_save_data() -> Dictionary:
 	return {
 		"highest_completed_level": highest_completed_level,
 		"exp": exp,
-		"equipment": equipment,
-		"drops": drops
+		"equipment": Inventories.equipment.to_list(),
+		"drops": Inventories.drops.to_list(),
+		"equipped_weapon": Inventories.equipment.weapon.id
 	}
 	
 func save_game(_data: Dictionary, reason: String):
@@ -67,8 +70,7 @@ func get_attack_speed() -> float:
 	return attack_speed
 
 func get_attack() -> float:
-	var attack = 25.0
-	attack += 2 * get_level()
+	var attack = 20.0
 	return attack
 	
 func get_max_health() -> float:

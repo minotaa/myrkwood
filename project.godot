@@ -22,11 +22,11 @@ config/icon="res://assets/sprites/icon.png"
 
 [autoload]
 
-Game="*res://scripts/game.gd"
-Enemies="*res://scripts/enemies.gd"
-Levels="*res://scripts/levels.gd"
 Items="*res://scripts/items.gd"
 Inventories="*res://scripts/inventories.gd"
+Levels="*res://scripts/levels.gd"
+Game="*res://scripts/game.gd"
+Enemies="*res://scripts/enemies.gd"
 
 [display]
 

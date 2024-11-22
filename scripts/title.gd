@@ -12,7 +12,7 @@ var splashes = [
 	"Absolute Cinema",
 	"meow",
 	"woof",
-	"\"awawawa\""
+	#"\"awawawa\"" # Put the fries in the bag
 ]
 
 @onready var menu: PackedScene = preload("res://scenes/menu.tscn")

@@ -126,7 +126,7 @@ func get_y_pos(offset = 0, _gravity = "top") -> float:
 		_y_pos = margins.top + offset_position.y + offset
 	else:
 		_y_pos = resolution.y - margins.top - button_size.y - offset_position.y - offset
-	return _y_pos - 32
+	return _y_pos - 36
 
 
 func update_x_position() -> void:

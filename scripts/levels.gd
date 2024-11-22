@@ -19,3 +19,14 @@ func _ready() -> void:
 	zero.id = 0
 	zero.name = "Departure"
 	levels.append(zero)
+
+	var one = Level.new()
+	one.enemy_list = [
+		Enemies.get_by_id(1),
+		Enemies.get_by_id(1),
+		Enemies.get_by_id(1),
+		Enemies.get_by_id(1)
+	]
+	one.id = 1
+	one.name = "Borax"
+	levels.append(one)

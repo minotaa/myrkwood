@@ -41,9 +41,17 @@ func load_game():
 			Inventories.equipment.weapon = Items.get_item_by_id(data["equipped_weapon"])
 		if data.has("equipped_armor"):
 			Inventories.equipment.armor = Items.get_item_by_id(data["equipped_armor"])
-	
+		if data.has("equipped_consumable"):
+			if data["equipped_consumable"] != null:
+				Inventories.equipment.consumable = Items.get_item_by_id(data["equipped_consumable"])
 	print("Loaded the game.")
 	did_the_game_load_yet_also_big_boobs = true
+	
+func get_consumable_id():
+	if Inventories.equipment.consumable != null:
+		return Inventories.equipment.consumable.id
+	else:
+		return null
 	
 func get_game_save_data() -> Dictionary:
 	if Inventories.equipment.list.is_empty():
@@ -61,7 +69,8 @@ func get_game_save_data() -> Dictionary:
 		"equipment": Inventories.equipment.to_list(),
 		"drops": Inventories.drops.to_list(),
 		"equipped_weapon": Inventories.equipment.weapon.id,
-		"equipped_armor": Inventories.equipment.armor.id
+		"equipped_armor": Inventories.equipment.armor.id,
+		"equipped_consumable": get_consumable_id()
 	}
 	
 func save_game(_data: Dictionary, reason: String):

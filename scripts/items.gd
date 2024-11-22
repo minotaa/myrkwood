@@ -62,12 +62,15 @@ func _init() -> void:
 	glass_knife.texture = atlas
 	glass_knife.damage = 10.0
 	glass_knife.craftable = true
-	var item_stack = ItemStack.new()
-	item_stack.amount = 1
-	item_stack.type = get_item_by_id(3)
-	glass_knife.min_requirement = [item_stack]
-	item_stack.amount = 5
-	glass_knife.requirement = [item_stack]
+	var min_requirement = ItemStack.new()
+	min_requirement.amount = 1
+	min_requirement.type = get_item_by_id(3)
+	glass_knife.min_requirement = [min_requirement]
+	var requirement = ItemStack.new()
+	requirement.amount = 5
+	requirement.type = get_item_by_id(3)
+	glass_knife.requirement = [requirement]
+	glass_knife.only_craft_once = true
 	items.append(glass_knife)
 	
 	print("items added")

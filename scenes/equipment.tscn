@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://crbynhf724w78"]
+
+[ext_resource type="Script" path="res://scripts/equipment_button.gd" id="1_yruq6"]
+[ext_resource type="Texture2D" uid="uid://d0mmrbctam71x" path="res://assets/sprites/items.png" id="2_1mkdg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6cdt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tl6x"]
+bg_color = Color(0.253843, 0.253843, 0.253843, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0.823529, 0.831373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kwog"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx8wm"]
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nudq"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk30h"]
+atlas = ExtResource("2_1mkdg")
+region = Rect2(32, 0, 16, 16)
+
+[node name="Equipment" type="Control"]
+texture_filter = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchor_right = 0.277778
+anchor_bottom = 0.15625
+offset_right = -1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yruq6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 155
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p6cdt")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_4tl6x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4kwog")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fx8wm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5nudq")
+icon = SubResource("AtlasTexture_jk30h")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

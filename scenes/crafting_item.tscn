@@ -115,3 +115,5 @@ grow_vertical = 2
 text = "oye shorty dime que lo que tu quiere fuerte"
 label_settings = SubResource("LabelSettings_fe82e")
 autowrap_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

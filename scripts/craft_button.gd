@@ -20,5 +20,21 @@ func _process(delta: float) -> void:
 	$TextureRect.texture = item.texture
 	$Name.text = item.name
 	$Requirements.text = format_list(item.requirement)
-	$Button.disabled = can_craft
-		
+	$Button.disabled = !can_craft
+
+func _on_button_pressed() -> void:
+	if item != null:
+		var item_stack = ItemStack.new()
+		item_stack.type = item
+		item_stack.amount = 1
+		Inventories.equipment.add_item(item_stack)
+		ToastParty.show({
+			"text": "You crafted a " + item.name + "!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
+		if item.only_craft_once:
+			queue_free()

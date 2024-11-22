@@ -10,6 +10,7 @@ var texture: Texture
 var craftable: bool = false
 var requirement = []
 var min_requirement = [] # To view it in crafting.
+var only_craft_once: bool = false
 
 func _to_string() -> String:
 	return name + " (" + str(id) + ")"

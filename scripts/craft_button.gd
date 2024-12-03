@@ -24,9 +24,12 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	if item != null:
+		Game.items_crafted += 1
 		var item_stack = ItemStack.new()
 		item_stack.type = item
 		item_stack.amount = 1
+		for req in item.requirement:
+			Inventories.drops.take_item(req.type, req.amount)
 		Inventories.equipment.add_item(item_stack)
 		ToastParty.show({
 			"text": "You crafted a " + item.name + "!",
@@ -38,3 +41,4 @@ func _on_button_pressed() -> void:
 		})
 		if item.only_craft_once:
 			queue_free()
+	get_node("../../../../../../..").refresh_menu()

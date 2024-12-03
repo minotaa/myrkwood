@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=39 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
@@ -8,6 +8,8 @@
 [ext_resource type="Shader" path="res://scripts/shaders/melt.gdshader" id="5_wwnh4"]
 [ext_resource type="Texture2D" uid="uid://bnxw0e4ir0pg" path="res://assets/sprites/slime.png" id="6_v2rec"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="7_lmkk5"]
+[ext_resource type="Texture2D" uid="uid://b2hels20ykw5r" path="res://assets/sprites/null.png" id="7_yahae"]
+[ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="8_v7i3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a11u7"]
 bg_color = Color(0, 0, 0, 0)
@@ -22,13 +24,24 @@ shader = ExtResource("5_wwnh4")
 shader_parameter/progress = 0.0
 shader_parameter/meltiness = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yahae"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.163861, 0.163861, 0.163861, 0.854902)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="LabelSettings" id="LabelSettings_qd3wb"]
 font = ExtResource("1_2ey2a")
 font_size = 48
 
-[sub_resource type="FontVariation" id="FontVariation_da2hc"]
-base_font = ExtResource("1_2ey2a")
-variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+[sub_resource type="LabelSettings" id="LabelSettings_l03xe"]
+font = ExtResource("1_2ey2a")
+font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_rg4p4"]
 font = ExtResource("4_ply01")
@@ -64,6 +77,116 @@ border_color = Color(0.737193, 0.737193, 0.737193, 1)
 line_spacing = 12.0
 font = ExtResource("4_ply01")
 font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66ngm"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03edq"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ni85"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vceff"]
+font = ExtResource("4_ply01")
+font_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yahae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7i3o"]
+bg_color = Color(1, 1, 1, 0.639216)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66ngm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vceff"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekamt"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djc8l"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4dll"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7ekf"]
 particle_flag_disable_z = true
@@ -125,24 +248,60 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_v2rec")
 
+[node name="EnemyEffects" type="Control" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -528.0
+offset_right = 296.0
+offset_bottom = -464.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Main/EnemyEffects"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -26.0
+offset_bottom = 26.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yahae")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/EnemyEffects/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+alignment = 2
+
 [node name="GameOver" type="Label" parent="UI/Main"]
 visible = false
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -296.0
-offset_top = 618.0
-offset_right = 280.0
-offset_bottom = 719.0
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -18.5
+offset_right = 288.0
+offset_bottom = 82.5
 grow_horizontal = 2
+grow_vertical = 2
 text = "You died in the forest, your adventure is done."
 label_settings = SubResource("LabelSettings_qd3wb")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Level" type="RichTextLabel" parent="UI/Main"]
+[node name="Level" type="Label" parent="UI/Main"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -156,17 +315,8 @@ offset_right = 320.0
 offset_bottom = -564.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("1_2ey2a")
-theme_override_fonts/italics_font = SubResource("FontVariation_da2hc")
-theme_override_font_sizes/bold_italics_font_size = 42
-theme_override_font_sizes/italics_font_size = 42
-theme_override_font_sizes/mono_font_size = 42
-theme_override_font_sizes/normal_font_size = 51
-theme_override_font_sizes/bold_font_size = 42
-bbcode_enabled = true
 text = "Level 0"
-fit_content = true
-scroll_active = false
+label_settings = SubResource("LabelSettings_l03xe")
 horizontal_alignment = 1
 
 [node name="LevelText" type="Label" parent="UI/Main"]
@@ -176,10 +326,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = -528.0
-offset_right = 296.0
-offset_bottom = -464.0
+offset_left = 112.0
+offset_top = -610.0
+offset_right = 312.0
+offset_bottom = -570.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0/10"
@@ -251,16 +401,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1606.0
+offset_left = -328.0
 offset_top = 114.0
-offset_right = 1110.0
+offset_right = -184.0
 offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "April growing the hugest fattest pair of bouncing gazongas you've ever seen in your life and just straight flip flopping them all over the place:
-"
+text = "0/100"
 label_settings = SubResource("LabelSettings_melst")
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="HP2" type="Label" parent="UI/Main"]
@@ -287,7 +436,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -316.0
+offset_left = -328.0
 offset_top = 162.0
 offset_right = -180.0
 offset_bottom = 218.0
@@ -295,7 +444,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "100/100"
 label_settings = SubResource("LabelSettings_melst")
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="MP2" type="Label" parent="UI/Main"]
@@ -353,13 +502,79 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Consumable" type="Button" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 232.0
+offset_right = 96.0
+offset_bottom = 424.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7i3o")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_66ngm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_03edq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_22uqi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6ni85")
+icon = ExtResource("7_yahae")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/Main/Consumable"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "x100"
+label_settings = SubResource("LabelSettings_vceff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Main/Consumable"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 184.0
+offset_bottom = 184.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_yahae")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v7i3o")
+fill_mode = 3
+show_percentage = false
+
+[node name="Back" type="Button" parent="UI/Main"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 47.0
+offset_right = 96.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("4_ply01")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_66ngm")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vceff")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekamt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_djc8l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4dll")
+icon = ExtResource("8_v7i3o")
+icon_alignment = 1
+expand_icon = true
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
 texture_filter = 1
 position = Vector2(360, 384)
 scale = Vector2(10, 10)
-texture = ExtResource("5_mm37a")
 process_material = SubResource("ParticleProcessMaterial_v7ekf")
+texture = ExtResource("5_mm37a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_lmkk5")
@@ -376,11 +591,20 @@ autostart = true
 [node name="MagicTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="ConsumableTimer" type="Timer" parent="."]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPolyphonic_wto6v")
 
+[node name="EffectTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="mouse_entered" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_exited"]
+[connection signal="pressed" from="UI/Main/Consumable" to="." method="_on_consumable_pressed"]
+[connection signal="pressed" from="UI/Main/Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="PlayerTimer" to="." method="_on_player_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="MagicTimer" to="." method="_on_misc_timer_timeout"]
+[connection signal="timeout" from="ConsumableTimer" to="." method="_on_consumable_timer_timeout"]
+[connection signal="timeout" from="EffectTimer" to="." method="_on_effect_timer_timeout"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh8xpri0m1u8m"]
+
+[ext_resource type="Texture2D" uid="uid://n7byxxx2ghgx" path="res://assets/sprites/bleed.png" id="1_75f6q"]
+
+[node name="Effect" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_75f6q")
+expand_mode = 2

@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bo5m3pqwov2tt"]
+[gd_scene load_steps=23 format=3 uid="uid://bo5m3pqwov2tt"]
 
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_wcmpu"]
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="2_kd5n6"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="3_o54xh"]
+[ext_resource type="Texture2D" uid="uid://cpntobqu6i7p2" path="res://assets/sprites/checked.png" id="4_b3w7a"]
+[ext_resource type="Texture2D" uid="uid://d2gy6hcysbycs" path="res://assets/sprites/unchecked.png" id="5_4rr2b"]
+[ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="6_4rr2b"]
 
 [sub_resource type="FontVariation" id="FontVariation_7tql1"]
 base_font = ExtResource("2_kd5n6")
@@ -11,6 +14,10 @@ variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_47i4a"]
 font = ExtResource("2_kd5n6")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_iv7ll"]
+font = ExtResource("2_kd5n6")
+font_size = 102
 
 [sub_resource type="LabelSettings" id="LabelSettings_0lmml"]
 font = ExtResource("3_o54xh")
@@ -43,6 +50,70 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6dhs"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yql1r"]
+font = ExtResource("3_o54xh")
+font_size = 40
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6dhs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ia1n6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiwto"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w65of"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygloa"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6civk"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_wcmpu")
 
@@ -56,8 +127,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Title" type="RichTextLabel" parent="UI/Main"]
+[node name="Title2" type="RichTextLabel" parent="UI/Main"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -65,10 +139,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -315.0
-offset_right = 312.0
-offset_bottom = -213.0
+offset_left = -224.0
+offset_top = -296.0
+offset_right = 416.0
+offset_bottom = -194.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("2_kd5n6")
@@ -82,7 +156,6 @@ bbcode_enabled = true
 text = "Mirkwood"
 fit_content = true
 scroll_active = false
-horizontal_alignment = 1
 
 [node name="Splash Text" type="Label" parent="UI/Main"]
 texture_filter = 1
@@ -104,6 +177,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Title" type="Label" parent="UI/Main"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -299.0
+offset_right = 336.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Mirkwood"
+label_settings = SubResource("LabelSettings_iv7ll")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Version" type="Label" parent="UI/Main"]
 layout_mode = 1
 anchors_preset = 7
@@ -113,8 +206,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -336.0
 offset_top = -88.0
-offset_right = 344.0
-offset_bottom = -16.0
+offset_right = 328.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "v0.0.1"
@@ -144,28 +237,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_3mmnh")
 theme_override_styles/normal = SubResource("StyleBoxFlat_enllf")
 text = "Play"
 
-[node name="Options" type="Button" parent="UI/Main"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -272.0
-offset_top = 56.0
-offset_right = 256.0
-offset_bottom = 152.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_o54xh")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/focus = SubResource("StyleBoxEmpty_m5up5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_xaqki")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3mmnh")
-theme_override_styles/normal = SubResource("StyleBoxFlat_enllf")
-text = "Options"
-
-[node name="Feedback" type="Button" parent="UI/Main"]
+[node name="Options2" type="Button" parent="UI/Main"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,7 +256,158 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_m5up5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xaqki")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3mmnh")
 theme_override_styles/normal = SubResource("StyleBoxFlat_enllf")
+text = "Options"
+
+[node name="Feedback" type="Button" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 56.0
+offset_right = 256.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_o54xh")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m5up5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xaqki")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3mmnh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_enllf")
 text = "Beta Feedback"
 
+[node name="GameCenter" type="Button" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 280.0
+offset_right = 256.0
+offset_bottom = 376.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_o54xh")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m5up5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xaqki")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3mmnh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_enllf")
+text = "GameCenter"
+
+[node name="Options" type="Control" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Main/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -384.0
+offset_right = 344.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6dhs")
+
+[node name="Title" type="Label" parent="UI/Main/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -328.0
+offset_right = 144.0
+offset_bottom = -280.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_yql1r")
+horizontal_alignment = 1
+
+[node name="Sounds" type="CheckBox" parent="UI/Main/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -152.0
+offset_right = 280.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_o54xh")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p6dhs")
+theme_override_icons/checked = ExtResource("4_b3w7a")
+theme_override_icons/unchecked = ExtResource("5_4rr2b")
+button_pressed = true
+text = "Sounds?"
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Haptics_Vibrations" type="CheckBox" parent="UI/Main/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -48.0
+offset_right = 280.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_o54xh")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p6dhs")
+theme_override_icons/checked = ExtResource("4_b3w7a")
+theme_override_icons/unchecked = ExtResource("5_4rr2b")
+button_pressed = true
+text = "Haptics/Vibrations?"
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Back" type="Button" parent="UI/Main/Options"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 304.0
+offset_right = 136.0
+offset_bottom = 364.0
+theme_override_fonts/font = ExtResource("3_o54xh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ia1n6")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_hiwto")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w65of")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ygloa")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6civk")
+icon = ExtResource("6_4rr2b")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="UI/Main/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Main/Options2" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="UI/Main/Feedback" to="." method="_on_feedback_pressed"]
+[connection signal="pressed" from="UI/Main/GameCenter" to="." method="_on_game_center_pressed"]
+[connection signal="pressed" from="UI/Main/Options/Back" to="." method="_on_back_pressed"]

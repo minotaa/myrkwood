@@ -233,7 +233,6 @@ bbcode_enabled = true
 text = "Mirkwood"
 fit_content = true
 scroll_active = false
-horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main"]
 texture_filter = 1

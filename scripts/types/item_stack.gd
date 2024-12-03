@@ -6,4 +6,5 @@ var type: ItemType
 var data = {}
 
 func _to_string() -> String:
-	return "x" + str(amount) + " " + type.name 
+	# add a dev mode option
+	return "x" + str(amount) + " " + type.name #+ " " + str(data) 

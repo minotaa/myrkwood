@@ -4,15 +4,61 @@ var did_the_game_load_yet_also_big_boobs: bool = false
 
 var health: float = 100.0
 var magic: float = 100.0
-
 var exp: float = 0.0
+var gems: int = 0
+var highest_completed_level: int = 0
+var active_status_effects: Array[EnemyEffect] = []
+
+var sounds_enabled: bool = true
+var haptics_enabled: bool = false
+
 var temp_exp_gained: float = 0.0
 var temp_drops_gained = []
+var items_crafted: int = 0
+var enemies_killed: int = 0
 
 var game_level: Level
 var cached_enemy_list = []
 var live_enemy_list = []
-var highest_completed_level: int = 0
+
+func apply_status_effect(effect: Effect) -> void:
+	effect.on_apply.call()
+	active_status_effects.append(effect)
+
+func update_status_effects() -> void:
+	for effect in active_status_effects:
+		if effect.on_update:
+			effect.on_update.call()
+			
+		effect.timer -= 1.0
+		if effect.timer <= 0:
+			effect.on_expire.call()
+			active_status_effects.erase(effect)
+
+func number_to_roman(num: int) -> String:
+	var roman_numerals = {
+		1000: "M", 
+		900: "CM", 
+		500: "D", 
+		400: "CD",
+		100: "C", 
+		90: "XC", 
+		50: "L", 
+		40: "XL",
+		10: "X", 
+		9: "IX", 
+		5: "V", 
+		4: "IV", 
+		1: "I"
+	}
+	var result = ""
+	for value in roman_numerals.keys():
+		while num >= value:
+			result += roman_numerals[value]
+			num -= value
+	return result
+
+
 
 func load_game():
 	if did_the_game_load_yet_also_big_boobs == true:
@@ -41,9 +87,21 @@ func load_game():
 			Inventories.equipment.weapon = Items.get_item_by_id(data["equipped_weapon"])
 		if data.has("equipped_armor"):
 			Inventories.equipment.armor = Items.get_item_by_id(data["equipped_armor"])
+		if data.has("items_crafted"):
+			items_crafted = data["items_crafted"]
+		if data.has("enemies_killed"):
+			enemies_killed = data["enemies_killed"]
+		if data.has("gems"):
+			gems = data["gems"]
+		else:
+			gems = highest_completed_level
 		if data.has("equipped_consumable"):
 			if data["equipped_consumable"] != null:
 				Inventories.equipment.consumable = Items.get_item_by_id(data["equipped_consumable"])
+		if data.has("sounds_enabled"):
+			sounds_enabled = data["sounds_enabled"]
+		if data.has("haptics_enabled"):
+			haptics_enabled = data["haptics_enabled"]
 	print("Loaded the game.")
 	did_the_game_load_yet_also_big_boobs = true
 	
@@ -63,17 +121,41 @@ func get_game_save_data() -> Dictionary:
 		hoodie.amount = 1
 		Inventories.equipment.list.append(wooden_sword)
 		Inventories.equipment.list.append(hoodie)
+	
 	return {
 		"highest_completed_level": highest_completed_level,
+		"gems": gems,
 		"exp": exp,
 		"equipment": Inventories.equipment.to_list(),
 		"drops": Inventories.drops.to_list(),
 		"equipped_weapon": Inventories.equipment.weapon.id,
 		"equipped_armor": Inventories.equipment.armor.id,
-		"equipped_consumable": get_consumable_id()
+		"equipped_consumable": get_consumable_id(),
+		"items_crafted": items_crafted,
+		"enemies_killed": enemies_killed,
+		"haptics_enabled": haptics_enabled,
+		"sounds_enabled": sounds_enabled
 	}
 	
 func save_game(_data: Dictionary, reason: String):
+	if GameCenter.game_center != null:
+		GameCenter.game_center.post_score({
+			"score": enemies_killed,
+			"category": "enemies_killed"
+		})
+		GameCenter.game_center.post_score({
+			"score": get_level(),
+			"category": "highest_level"
+		})
+		GameCenter.game_center.post_score({
+			"score": highest_completed_level,
+			"category": "stages_progressed"
+		})
+		GameCenter.game_center.post_score({
+			"score": items_crafted,
+			"category": "items_crafted"
+		})
+		print("Updated Game Center scores.")
 	var save_file = FileAccess.open("user://game.april", FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(get_game_save_data()))
 	print("Saved the game. " + "(" + reason + ")")
@@ -87,14 +169,22 @@ func _notification(what: int) -> void:
 func _ready() -> void:
 	load_game()
 
+func get_current_weapon_level() -> int:
+	if Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data.has("level"):
+		return Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data["level"]
+	else:
+		return 0
+
 func get_attack_speed() -> float:
 	var attack_speed = 1.0
+	if Inventories.equipment.weapon != null:
+		attack_speed += Inventories.equipment.weapon.attack_speed.call()
 	return attack_speed
 
 func get_attack() -> float:
 	var attack = 20.0
 	if Inventories.equipment.weapon != null:
-		attack += Inventories.equipment.weapon.damage
+		attack += Inventories.equipment.weapon.damage.call()
 	return attack
 	
 func get_max_health() -> float:

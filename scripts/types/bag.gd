@@ -12,6 +12,12 @@ func total_size() -> int:
 func get_item(index: int) -> ItemStack:
 	return list[index]
 
+func get_item_stack(item: ItemType) -> ItemStack:
+	for i in list:
+		if i.type.id == item.id:
+			return i
+	return null
+
 func add_item(item: ItemStack) -> void:
 	for i in list: # Checks for existing items.
 		if i.type.id == item.type.id:
@@ -26,25 +32,36 @@ func has_item(item: ItemType) -> bool:
 			return true
 	return false
 
-func take_item(item: ItemType) -> void:
+func take_item(item: ItemType, amount: int) -> void:
 	for i in list:
-		if i.type.id == item.type:
-			i.amount -= 1
+		if i.type.id == item.id:
+			i.amount -= amount
+			if i.amount == 0:
+				list.erase(i)
 
 func set_list_from_save(_list: Array):
 	for value in _list:
 		var item = ItemStack.new()
 		item.amount = value.amount
 		item.type = Items.get_item_by_id(value.id)
+		if value.has("data"):
+			item.data = value["data"]
 		list.append(item)
 
 func to_list() -> Array:
 	var _list = []
 	for value in list:
-		_list.append({
-			"id": (((value as ItemStack).type) as ItemType).id,
-			"amount": (value as ItemStack).amount
-		})
+		if value.data.is_empty():
+			_list.append({
+				"id": (((value as ItemStack).type) as ItemType).id,
+				"amount": (value as ItemStack).amount
+			})
+		else:
+			_list.append({
+				"id": (((value as ItemStack).type) as ItemType).id,
+				"amount": (value as ItemStack).amount,
+				"data": (value as ItemStack).data
+			})
 	return _list
 
 func remove_item(item: ItemStack) -> void:

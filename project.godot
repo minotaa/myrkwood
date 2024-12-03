@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Mirkwood"
 config/description="A little trip down the path"
-config/version="0.0.1"
+config/version="0.4"
 run/main_scene="res://scenes/title.tscn"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.3", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -22,6 +22,7 @@ config/icon="res://assets/sprites/icon.png"
 
 [autoload]
 
+GameCenter="*res://scripts/game_center.gd"
 Items="*res://scripts/items.gd"
 Inventories="*res://scripts/inventories.gd"
 ToastParty="*res://addons/toastparty/toast-autoload.gd"
@@ -39,7 +40,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/toastparty/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/toastparty/plugin.cfg")
 
 [input_devices]
 

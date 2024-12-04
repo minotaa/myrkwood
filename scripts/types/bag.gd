@@ -28,7 +28,7 @@ func add_item(item: ItemStack) -> void:
 
 func has_item(item: ItemType) -> bool:
 	for i in list:
-		if i.type.id == item.type:
+		if i.type.id == item.id:
 			return true
 	return false
 

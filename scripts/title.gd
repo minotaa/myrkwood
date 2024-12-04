@@ -29,6 +29,8 @@ func _on_play_pressed() -> void:
 func _on_feedback_pressed() -> void:
 	OS.shell_open("https://discord.gg/zhz3nnCDDg")
 
+
+
 func _on_options_pressed() -> void:
 	$UI/Main/Title.visible = false
 	$"UI/Main/Splash Text".visible = false
@@ -55,3 +57,12 @@ func _on_back_pressed() -> void:
 	$UI/Main/Options2.visible = true
 	$UI/Main/Options.visible = false
 	$UI/Main/Feedback.visible = true
+
+
+func _on_sounds_pressed() -> void:
+	Game.sounds_enabled = $UI/Main/Options/Sounds.button_pressed
+	Game.haptics_enabled = $UI/Main/Options/Haptics_Vibrations.button_pressed
+
+func _on_haptics_vibrations_pressed() -> void:
+	Game.sounds_enabled = $UI/Main/Options/Sounds.button_pressed
+	Game.haptics_enabled = $UI/Main/Options/Haptics_Vibrations.button_pressed

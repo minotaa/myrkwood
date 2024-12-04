@@ -32,6 +32,7 @@ func _init() -> void:
 	var hoodie = Armor.new()
 	hoodie.id = 1
 	hoodie.name = "T-Shirt"
+	hoodie.texture_id = "normal"
 	hoodie.description = "Doesn't give any benefits but looks nice!"
 	atlas = AtlasTexture.new()
 	atlas.atlas = load("res://assets/sprites/items.png")
@@ -104,13 +105,13 @@ func _init() -> void:
 	var small_healing_potion = Consumable.new()
 	small_healing_potion.id = 5
 	small_healing_potion.name = "Small Healing Potion"
-	small_healing_potion.description = "Heals +25 HP, 10 second cooldown."
+	small_healing_potion.description = "Heals +25 HP, 5 second cooldown."
 	atlas = AtlasTexture.new()
 	atlas.atlas = load("res://assets/sprites/items.png")
 	atlas.region = Rect2(96.0, 0.0, 16.0, 16.0)
 	small_healing_potion.texture = atlas
 	small_healing_potion.cooldown = true
-	small_healing_potion.cooldown_seconds = 6.5
+	small_healing_potion.cooldown_seconds = 5
 	small_healing_potion.infinite = false
 	small_healing_potion.craftable = true
 	min_requirement = ItemStack.new()
@@ -139,6 +140,7 @@ func _init() -> void:
 	froggy_armor.id = 7
 	froggy_armor.name = "Froggy Armor"
 	froggy_armor.description = "+100 HP, +45 DEF"
+	froggy_armor.texture_id = "froggy"
 	atlas = AtlasTexture.new()
 	atlas.atlas = load("res://assets/sprites/items.png")
 	atlas.region = Rect2(112.0, 0.0, 16.0, 16.0)
@@ -186,8 +188,8 @@ func _init() -> void:
 	axe_of_the_dionaea.attack_speed = func():
 		return 1.5 - (0.1 * Game.get_current_weapon_level())
 	axe_of_the_dionaea.damage = func():
-		return 100 + (Game.get_current_weapon_level())
-	axe_of_the_dionaea.upgrade_message = "Increases damage by 1, increases attack speed by 0.1."
+		return 100 + (2 * Game.get_current_weapon_level())
+	axe_of_the_dionaea.upgrade_message = "Increases damage by 2, increases attack speed by 0.1."
 	axe_of_the_dionaea.max_level = 5
 	
 	var flytrap_req = ItemStack.new()
@@ -210,5 +212,27 @@ func _init() -> void:
 	atlas.region = Rect2(144.0, 0.0, 16.0, 16.0)
 	axe_of_the_dionaea.texture = atlas
 	items.append(axe_of_the_dionaea)
+	
+	var medium_healing_potion = Consumable.new()
+	medium_healing_potion.id = 11
+	medium_healing_potion.name = "Medium Healing Potion"
+	medium_healing_potion.description = "Heals +100 HP, 6.5 second cooldown."
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(48.0, 0.0, 16.0, 16.0)
+	medium_healing_potion.texture = atlas
+	medium_healing_potion.cooldown = true
+	medium_healing_potion.cooldown_seconds = 6.5
+	medium_healing_potion.infinite = false
+	medium_healing_potion.craftable = true
+	
+	var potion_req = ItemStack.new()
+	potion_req.type = get_item_by_id(5)
+	potion_req.amount = 1
+	medium_healing_potion.min_requirement = [blade_of_grass_min_req]
+	medium_healing_potion.requirement = [potion_req, blade_of_grass_min_req]
+	medium_healing_potion.on_consume = func():
+		Game.health = min(Game.health + 100, Game.get_max_health())
+	items.append(medium_healing_potion)
 	
 	print("items added")

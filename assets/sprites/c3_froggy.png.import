@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhxet74lst4h8"
-path="res://.godot/imported/c5.png-6afc188488441ae1f3cbe96488e3e225.ctex"
+uid="uid://4mxn40it3vti"
+path="res://.godot/imported/c3_froggy.png-144746127807a7028a54722d7b367209.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/c5.png"
-dest_files=["res://.godot/imported/c5.png-6afc188488441ae1f3cbe96488e3e225.ctex"]
+source_file="res://assets/sprites/c3_froggy.png"
+dest_files=["res://.godot/imported/c3_froggy.png-144746127807a7028a54722d7b367209.ctex"]
 
 [params]
 

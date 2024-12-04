@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 func refresh_menu() -> void:
 	print("refreshed menu")
+	
 	$UI/Main/Gems.visible = false
 	$UI/Main/Gem.visible = false
 	if Game.gems >= 1:
@@ -73,6 +74,13 @@ func refresh_menu() -> void:
 		$UI/Main/TabContainer/Loadout/Armor/Name.text = Inventories.equipment.armor.name
 		$UI/Main/TabContainer/Loadout/Armor/Description.text = Inventories.equipment.armor.description
 	
+		var outfit = AnimatedTexture.new()
+		outfit.frames = 5
+		for i in range(outfit.frames):
+			outfit.set_frame_texture(i, load("res://assets/sprites/c" + str(i + 1) + "_" + Inventories.equipment.armor.texture_id + ".png"))
+			outfit.set_frame_duration(i, 0.25)
+		$UI/Main/TextureRect.texture = outfit
+	
 	if Inventories.equipment.consumable != null and Inventories.equipment.get_item_stack(Inventories.equipment.consumable) == null:
 		Inventories.equipment.consumable = null
 	
@@ -120,7 +128,7 @@ func check_craftable_items() -> void:
 			var can_view = true
 			for req in item.min_requirement:
 				var found = false
-				for inv_item in Inventories.drops.list:
+				for inv_item in Inventories.drops.list + Inventories.equipment.list:
 					if inv_item.type.id == req.type.id and inv_item.amount >= req.amount:
 						found = true
 						break
@@ -134,7 +142,7 @@ func check_craftable_items() -> void:
 				var can_craft = true
 				for req in item.requirement:
 					var found = false
-					for inv_item in Inventories.drops.list:
+					for inv_item in Inventories.drops.list + Inventories.equipment.list:
 						if inv_item.type.id == req.type.id and inv_item.amount >= req.amount:
 							found = true
 							break

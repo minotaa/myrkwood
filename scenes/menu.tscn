@@ -2,22 +2,22 @@
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_x0qtr"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_ymrvc"]
-[ext_resource type="Texture2D" uid="uid://co77hc7k66ah5" path="res://assets/sprites/c1.png" id="2_x50tw"]
-[ext_resource type="Texture2D" uid="uid://drak28auqno4t" path="res://assets/sprites/c2.png" id="3_ibaf3"]
+[ext_resource type="Texture2D" uid="uid://co77hc7k66ah5" path="res://assets/sprites/c1_normal.png" id="2_x50tw"]
+[ext_resource type="Texture2D" uid="uid://drak28auqno4t" path="res://assets/sprites/c2_normal.png" id="3_ibaf3"]
 [ext_resource type="Texture2D" uid="uid://d0p8cmwe5fvjf" path="res://assets/sprites/gem.png" id="4_6cdou"]
-[ext_resource type="Texture2D" uid="uid://bhljkb51mn0of" path="res://assets/sprites/c3.png" id="4_c7w70"]
+[ext_resource type="Texture2D" uid="uid://bhljkb51mn0of" path="res://assets/sprites/c3_normal.png" id="4_c7w70"]
 [ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="4_i42df"]
-[ext_resource type="Texture2D" uid="uid://c7ub8fs3lrivp" path="res://assets/sprites/c4.png" id="5_bppoq"]
-[ext_resource type="Texture2D" uid="uid://dhxet74lst4h8" path="res://assets/sprites/c5.png" id="6_0u63j"]
+[ext_resource type="Texture2D" uid="uid://c7ub8fs3lrivp" path="res://assets/sprites/c4_normal.png" id="5_bppoq"]
+[ext_resource type="Texture2D" uid="uid://dhxet74lst4h8" path="res://assets/sprites/c5_normal.png" id="6_0u63j"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="8_eelid"]
 [ext_resource type="Texture2D" uid="uid://d0mmrbctam71x" path="res://assets/sprites/items.png" id="9_5sulo"]
 [ext_resource type="PackedScene" uid="uid://dc51865qsxqe8" path="res://scenes/item_stack.tscn" id="10_70i5f"]
 [ext_resource type="Texture2D" uid="uid://b2hels20ykw5r" path="res://assets/sprites/null.png" id="10_mj5lg"]
 [ext_resource type="PackedScene" uid="uid://crbynhf724w78" path="res://scenes/equipment.tscn" id="11_ufwb2"]
 
-[sub_resource type="FontVariation" id="FontVariation_loxei"]
-base_font = ExtResource("1_x0qtr")
-variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+[sub_resource type="LabelSettings" id="LabelSettings_yk5mj"]
+font = ExtResource("1_x0qtr")
+font_size = 72
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7jp70"]
 
@@ -207,7 +207,7 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ppsm6"]
 font = ExtResource("1_x0qtr")
-font_size = 51
+font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_n8bds"]
 font = ExtResource("8_eelid")
@@ -332,35 +332,34 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Title" type="RichTextLabel" parent="UI/Main"]
+[node name="Title" type="Label" parent="UI/Main"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
+anchor_top = 0.061
 anchor_right = 0.5
-offset_left = -320.0
-offset_top = 41.0
-offset_right = 320.0
-offset_bottom = 114.0
+anchor_bottom = 0.061
+offset_left = -360.0
+offset_top = -37.08
+offset_right = 360.0
+offset_bottom = 35.92
 grow_horizontal = 2
-theme_override_fonts/normal_font = ExtResource("1_x0qtr")
-theme_override_fonts/italics_font = SubResource("FontVariation_loxei")
-theme_override_font_sizes/bold_italics_font_size = 72
-theme_override_font_sizes/italics_font_size = 72
-theme_override_font_sizes/mono_font_size = 72
-theme_override_font_sizes/normal_font_size = 72
-theme_override_font_sizes/bold_font_size = 72
-bbcode_enabled = true
-text = "	      Mirkwood"
-fit_content = true
-scroll_active = false
+text = "Mirkwood"
+label_settings = SubResource("LabelSettings_yk5mj")
+horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="UI/Main"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 47.0
-offset_right = 96.0
-offset_bottom = 107.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.06
+anchor_right = 0.083
+anchor_bottom = 0.06
+offset_left = -35.76
+offset_top = -29.8
+offset_right = 36.24
+offset_bottom = 30.2
 theme_override_fonts/font = ExtResource("8_eelid")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7jp70")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_rsfmq")
@@ -389,13 +388,15 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_81l6r")
 
 [node name="Gems" type="Label" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -189.0
-offset_top = 68.0
-offset_right = -61.0
-offset_bottom = 92.0
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.062
+anchor_right = 0.9
+anchor_bottom = 0.062
+offset_left = -117.0
+offset_top = -11.36
+offset_right = 11.0
+offset_bottom = 12.64
 grow_horizontal = 0
 text = "0"
 label_settings = SubResource("LabelSettings_i42df")
@@ -405,42 +406,44 @@ vertical_alignment = 1
 [node name="Gem" type="TextureRect" parent="UI/Main"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -61.0
-offset_top = 58.0
-offset_right = -21.0
-offset_bottom = 98.0
+anchors_preset = -1
+anchor_left = 0.943
+anchor_top = 0.061
+anchor_right = 0.943
+anchor_bottom = 0.061
+offset_left = -19.96
+offset_top = -20.08
+offset_right = 20.04
+offset_bottom = 19.92
 grow_horizontal = 0
 texture = ExtResource("4_6cdou")
 
 [node name="Panel" type="Panel" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -336.0
-offset_top = -512.0
-offset_right = 336.0
-offset_bottom = -176.0
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.106
+anchor_right = 0.967
+anchor_bottom = 0.362
+offset_left = 0.24
+offset_top = -7.68001
+offset_right = -0.240051
+offset_bottom = 0.639984
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1fjaw")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.237
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.237
 offset_left = -296.0
-offset_top = -464.0
+offset_top = -127.36
 offset_right = -168.0
-offset_bottom = -208.0
+offset_bottom = 128.64
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AnimatedTexture_qep5d")
@@ -448,18 +451,18 @@ texture = SubResource("AnimatedTexture_qep5d")
 [node name="Meta" type="Label" parent="UI/Main"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.237
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.237
 offset_left = -158.0
-offset_top = -464.0
+offset_top = -127.36
 offset_right = 298.0
-offset_bottom = -208.0
+offset_bottom = 128.64
 grow_horizontal = 2
 grow_vertical = 2
-text = "Level: 0
+text = "Level: 
 Health: 0
 Attack: 0
 Defense: 0
@@ -470,15 +473,15 @@ autowrap_mode = 2
 
 [node name="Level" type="HBoxContainer" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.237
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.237
 offset_left = 21.0
-offset_top = -444.0
+offset_top = -107.36
 offset_right = 257.0
-offset_bottom = -412.0
+offset_bottom = -75.36
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -499,15 +502,14 @@ show_percentage = false
 
 [node name="TabContainer" type="TabContainer" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -336.0
-offset_top = -144.0
-offset_right = 336.0
-offset_bottom = 608.0
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.375
+anchor_right = 0.967
+anchor_bottom = 0.975
+offset_left = 0.24
+offset_top = -3.05176e-05
+offset_right = -0.240051
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/side_margin = 8
@@ -519,6 +521,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ob78k")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_10ldw")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_2g4it")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_twohf")
+tab_alignment = 1
 current_tab = 0
 
 [node name="Levels" type="Control" parent="UI/Main/TabContainer"]
@@ -527,18 +530,23 @@ metadata/_tab_index = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Main/TabContainer/Levels"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_bottom = -8.0
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.023
+anchor_right = 0.976
+anchor_bottom = 0.978
+offset_left = 0.256
+offset_top = 0.600998
+offset_right = -0.256042
+offset_bottom = 0.685974
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Main/TabContainer/Levels/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -588,9 +596,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -133.0
-offset_top = -70.0
+offset_top = -79.0
 offset_right = 281.0
-offset_bottom = -18.0
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Wooden Sword"
@@ -655,9 +663,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -133.0
-offset_top = -70.0
+offset_top = -73.0
 offset_right = 281.0
-offset_bottom = -18.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Wooden Sword"
@@ -722,9 +730,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -133.0
-offset_top = -70.0
+offset_top = -72.0
 offset_right = 281.0
-offset_bottom = -18.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Nothing"
@@ -908,9 +916,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -280.0
-offset_top = -35.5
+offset_top = -36.0
 offset_right = 280.0
-offset_bottom = 180.5
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_eelid")
@@ -1005,13 +1013,15 @@ metadata/_tab_index = 4
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Main/TabContainer/Drops"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -8.0
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.022
+anchor_right = 0.976
+anchor_bottom = 0.989
+offset_left = 0.256
+offset_top = 0.313999
+offset_right = -0.256042
+offset_bottom = -0.157043
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 3

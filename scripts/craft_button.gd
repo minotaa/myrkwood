@@ -29,7 +29,10 @@ func _on_button_pressed() -> void:
 		item_stack.type = item
 		item_stack.amount = 1
 		for req in item.requirement:
-			Inventories.drops.take_item(req.type, req.amount)
+			if Inventories.drops.has_item(req.type):
+				Inventories.drops.take_item(req.type, req.amount)
+			elif Inventories.equipment.has_item(req.type):
+				Inventories.equipment.take_item(req.type, req.amount)
 		Inventories.equipment.add_item(item_stack)
 		ToastParty.show({
 			"text": "You crafted a " + item.name + "!",

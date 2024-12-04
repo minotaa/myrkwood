@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _on_consumable_pressed() -> void:
 	if Game.haptics_enabled:
-		Input.vibrate_handheld(100)
+		Input.vibrate_handheld(25)
 	if Game.sounds_enabled:
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/powerup.wav"))
 	Inventories.equipment.take_item(Inventories.equipment.consumable, 1)
@@ -112,7 +112,7 @@ func attack_enemy() -> void:
 	if Game.sounds_enabled:
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/hit.wav"))
 	if Game.haptics_enabled:
-		Input.vibrate_handheld(300)
+		Input.vibrate_handheld(100)
 	var damage_multiplier = 1 - (enemy_defense / (enemy_defense + 100))
 	var damage_taken = attack * damage_multiplier
 	enemy_health -= damage_taken
@@ -121,7 +121,7 @@ func attack_enemy() -> void:
 		enemy_alive = false
 		melt = true
 		if Game.haptics_enabled:
-			Input.vibrate_handheld(1000, 0.9)
+			Input.vibrate_handheld(500, 0.9)
 		if Game.sounds_enabled:
 			$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/explosion.wav"))
 		Game.exp += enemy.exp
@@ -147,7 +147,7 @@ func attack_enemy() -> void:
 			if Game.sounds_enabled:
 				$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/pickup.wav"))
 			if Game.haptics_enabled:
-				Input.vibrate_handheld(5000, 1.0)
+				Input.vibrate_handheld(500, 1.0)
 			Game.save_game(Game.get_game_save_data(), "won")
 			for item in Game.temp_drops_gained:
 				var item_stack = ItemStack.new()
@@ -218,7 +218,7 @@ func attack_player() -> void:
 		if Game.sounds_enabled:
 			$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/tone.wav"))
 		if Game.haptics_enabled:
-			Input.vibrate_handheld(4999, 0.9)
+			Input.vibrate_handheld(300, 0.9)
 func _on_player_timer_timeout() -> void:
 	attack_enemy()
 

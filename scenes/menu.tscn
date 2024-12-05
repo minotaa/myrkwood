@@ -542,7 +542,6 @@ offset_bottom = 0.685974
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Main/TabContainer/Levels/ScrollContainer"]
 layout_mode = 2
@@ -857,13 +856,15 @@ metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Main/TabContainer/Crafting"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -8.0
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.022
+anchor_right = 0.976
+anchor_bottom = 0.989
+offset_left = 0.256
+offset_top = 0.313999
+offset_right = -0.256042
+offset_bottom = -0.157043
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 3

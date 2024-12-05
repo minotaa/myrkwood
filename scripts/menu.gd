@@ -9,13 +9,7 @@ func _ready() -> void:
 	
 func refresh_menu() -> void:
 	print("refreshed menu")
-	
-	$UI/Main/Gems.visible = false
-	$UI/Main/Gem.visible = false
-	if Game.gems >= 1:
-		$UI/Main/Gems.visible = true
-		$UI/Main/Gem.visible = true
-		$UI/Main/Gems.text = str(Game.gems)
+	$UI/Main/Gems/Label.text = str(Game.gems)
 	for children in $UI/Main/TabContainer/Levels/ScrollContainer/VBoxContainer.get_children():
 		children.queue_free()
 	for i in range(0, Game.highest_completed_level + 2):
@@ -259,5 +253,5 @@ func _on_upgrade_pressed() -> void:
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
 
-#func _on_gem_button_pressed() -> void:
-	#get_tree().change_scene_to_file("res://scenes/gems.tscn")
+func _on_gem_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/gems.tscn")

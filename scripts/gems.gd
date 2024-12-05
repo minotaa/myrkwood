@@ -7,6 +7,5 @@ func _on_back_pressed() -> void:
 func _process(delta: float) -> void:
 	$CanvasLayer/Main/YouHave.text = "You have " + str(roundi(Game.gems)) + " gems"
 
-#func _on_watch_ad_pressed() -> void:
-	#Game.load_rewarded_ad()
-	#Game.show_rewarded_ad()
+func _on_watch_ad_pressed() -> void:
+	Game.load_rewarded_ad()

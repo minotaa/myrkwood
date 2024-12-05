@@ -21,6 +21,9 @@ var game_level: Level
 var cached_enemy_list = []
 var live_enemy_list = []
 
+var _rewarded_ad : RewardedAd
+var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
+
 func apply_status_effect(effect: Effect) -> void:
 	effect.on_apply.call()
 	active_status_effects.append(effect)
@@ -168,7 +171,50 @@ func _notification(what: int) -> void:
 
 func _ready() -> void:
 	load_game()
+	MobileAds.initialize()
+	MobileAds.set_ios_app_pause_on_background(true)
+	on_user_earned_reward_listener.on_user_earned_reward = func(rewarded_item : RewardedItem):
+		print("on_user_earned_reward, rewarded_item: rewarded", rewarded_item.amount, rewarded_item.type)
+		if (rewarded_item.type == "Gem"):
+			Game.gems += rewarded_item.amount
+			ToastParty.show({
+				"text": "You were rewarded x" + str(rewarded_item.amount) + " gems for watching an ad!",
+				"bgcolor": Color(0, 0, 0, 0.7),
+				"color": Color(1, 1, 1, 1),
+				"gravity": "bottom",
+				"direction": "center",
+				"text_size": 16
+			})
+	#var request_configuration := RequestConfiguration.new()
+	#request_configuration.test_device_ids = ["7c96d4dc73546e0de5dce56d0aac74e9"]
+	#MobileAds.set_request_configuration(request_configuration)
 
+func load_rewarded_ad() -> void:
+	if _rewarded_ad:
+		_rewarded_ad.destroy()
+		_rewarded_ad = null
+
+	var unit_id : String = "ca-app-pub-4596716586585952/7903370356"
+
+	var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
+	rewarded_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
+		print(adError.message)
+		ToastParty.show({
+			"text": "Failed to load ad!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
+
+	rewarded_ad_load_callback.on_ad_loaded = func(rewarded_ad : RewardedAd) -> void:
+		print("rewarded ad loaded" + str(rewarded_ad._uid))
+		_rewarded_ad = rewarded_ad
+		_rewarded_ad.show(on_user_earned_reward_listener)
+
+	RewardedAdLoader.new().load(unit_id, AdRequest.new(), rewarded_ad_load_callback)
+	
 func get_current_weapon_level() -> int:
 	if Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data.has("level"):
 		return Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data["level"]

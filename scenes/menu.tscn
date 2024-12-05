@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c5b4j7qffxpbv"]
+[gd_scene load_steps=60 format=3 uid="uid://c5b4j7qffxpbv"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_x0qtr"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_ymrvc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d0p8cmwe5fvjf" path="res://assets/sprites/gem.png" id="4_6cdou"]
 [ext_resource type="Texture2D" uid="uid://bhljkb51mn0of" path="res://assets/sprites/c3_normal.png" id="4_c7w70"]
 [ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="4_i42df"]
+[ext_resource type="Texture2D" uid="uid://pirtwjmav6tm" path="res://assets/sprites/plus.png" id="5_08exb"]
 [ext_resource type="Texture2D" uid="uid://c7ub8fs3lrivp" path="res://assets/sprites/c4_normal.png" id="5_bppoq"]
 [ext_resource type="Texture2D" uid="uid://dhxet74lst4h8" path="res://assets/sprites/c5_normal.png" id="6_0u63j"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="8_eelid"]
@@ -69,19 +70,43 @@ border_width_right = 8
 border_width_bottom = 8
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i42df"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mxgkd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g6gyw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dmrc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_81l6r"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_i42df"]
 font = ExtResource("8_eelid")
 font_size = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i42df"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncmjx"]
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_324pj"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2str"]
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2jjj"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fjaw"]
 bg_color = Color(0, 0, 0, 0)
@@ -341,9 +366,9 @@ anchor_top = 0.061
 anchor_right = 0.5
 anchor_bottom = 0.061
 offset_left = -360.0
-offset_top = -37.08
+offset_top = -13.08
 offset_right = 360.0
-offset_bottom = 35.92
+offset_bottom = 59.92
 grow_horizontal = 2
 text = "Mirkwood"
 label_settings = SubResource("LabelSettings_yk5mj")
@@ -357,9 +382,9 @@ anchor_top = 0.06
 anchor_right = 0.083
 anchor_bottom = 0.06
 offset_left = -35.76
-offset_top = -29.8
+offset_top = -5.8
 offset_right = 36.24
-offset_bottom = 30.2
+offset_bottom = 54.2
 theme_override_fonts/font = ExtResource("8_eelid")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7jp70")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_rsfmq")
@@ -370,63 +395,80 @@ icon = ExtResource("4_i42df")
 icon_alignment = 1
 expand_icon = true
 
-[node name="GemButton" type="Button" parent="UI/Main"]
-visible = false
+[node name="Gems" type="Control" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -208.0
-offset_top = 8.0
-offset_bottom = 128.0
-grow_horizontal = 0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_i42df")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_mxgkd")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_g6gyw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_3dmrc")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_81l6r")
-
-[node name="Gems" type="Label" parent="UI/Main"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
+anchor_left = 0.839
 anchor_top = 0.062
-anchor_right = 0.9
+anchor_right = 0.839
 anchor_bottom = 0.062
-offset_left = -117.0
-offset_top = -11.36
-offset_right = 11.0
-offset_bottom = 12.64
-grow_horizontal = 0
+offset_left = -92.08
+offset_top = -15.36
+offset_right = 91.92
+offset_bottom = 64.64
+
+[node name="Label" type="Label" parent="UI/Main/Gems"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_right = 88.0
+offset_bottom = 12.0
+grow_vertical = 2
 text = "0"
 label_settings = SubResource("LabelSettings_i42df")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Gem" type="TextureRect" parent="UI/Main"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Gems"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.943
-anchor_top = 0.061
-anchor_right = 0.943
-anchor_bottom = 0.061
-offset_left = -19.96
-offset_top = -20.08
-offset_right = 20.04
-offset_bottom = 19.92
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -20.0
+offset_right = 36.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_6cdou")
+
+[node name="Button" type="Button" parent="UI/Main/Gems"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_eelid")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i42df")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ncmjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_324pj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s2str")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r2jjj")
+icon = ExtResource("5_08exb")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Panel" type="Panel" parent="UI/Main"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.033
-anchor_top = 0.106
+anchor_top = 0.112
 anchor_right = 0.967
 anchor_bottom = 0.362
 offset_left = 0.24
-offset_top = -7.68001
+offset_top = 0.639999
 offset_right = -0.240051
 offset_bottom = 0.639984
 grow_horizontal = 2
@@ -1007,6 +1049,31 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_6cdou")
 
+[node name="Gems" type="Button" parent="UI/Main/TabContainer/Upgrade"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = 245.5
+offset_right = 176.0
+offset_bottom = 300.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_eelid")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i42df")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ncmjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_324pj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s2str")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r2jjj")
+text = "Get more gems"
+icon_alignment = 1
+expand_icon = true
+
 [node name="Drops" type="Control" parent="UI/Main/TabContainer"]
 visible = false
 layout_mode = 2
@@ -1042,11 +1109,12 @@ layout_mode = 2
 wait_time = 2.5
 
 [connection signal="pressed" from="UI/Main/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="UI/Main/GemButton" to="." method="_on_gem_button_pressed"]
+[connection signal="pressed" from="UI/Main/Gems/Button" to="." method="_on_gem_button_pressed"]
 [connection signal="tab_selected" from="UI/Main/TabContainer" to="." method="_on_tab_container_tab_selected"]
 [connection signal="pressed" from="UI/Main/TabContainer/Loadout/Weapon" to="." method="_on_weapon_pressed"]
 [connection signal="pressed" from="UI/Main/TabContainer/Loadout/Armor" to="." method="_on_armor_pressed"]
 [connection signal="pressed" from="UI/Main/TabContainer/Loadout/Consumable" to="." method="_on_consumable_pressed"]
 [connection signal="pressed" from="UI/Main/TabContainer/Loadout/Options/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="UI/Main/TabContainer/Upgrade/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="UI/Main/TabContainer/Upgrade/Gems" to="." method="_on_gem_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

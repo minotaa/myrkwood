@@ -185,16 +185,30 @@ func _ready() -> void:
 				"direction": "center",
 				"text_size": 16
 			})
+		if (rewarded_item.type == "DoubledRewards"):
+			exp += Game.temp_exp_gained
+			for item in Game.temp_drops_gained:
+				var item_stack = ItemStack.new()
+				item_stack.amount = 1
+				item_stack.type = item
+				Inventories.drops.add_item(item_stack)
+			ToastParty.show({
+				"text": "Doubled your rewards for watching an ad!",
+				"bgcolor": Color(0, 0, 0, 0.7),
+				"color": Color(1, 1, 1, 1),
+				"gravity": "bottom",
+				"direction": "center",
+				"text_size": 16
+			})
+			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	#var request_configuration := RequestConfiguration.new()
 	#request_configuration.test_device_ids = ["7c96d4dc73546e0de5dce56d0aac74e9"]
 	#MobileAds.set_request_configuration(request_configuration)
 
-func load_rewarded_ad() -> void:
+func load_rewarded_ad(unit_id: String = "ca-app-pub-4596716586585952/7903370356") -> void:
 	if _rewarded_ad:
 		_rewarded_ad.destroy()
 		_rewarded_ad = null
-
-	var unit_id : String = "ca-app-pub-4596716586585952/7903370356"
 
 	var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
 	rewarded_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:

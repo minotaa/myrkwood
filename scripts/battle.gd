@@ -17,6 +17,8 @@ var attack_speed: float = Game.get_attack_speed()
 
 var enemy: Enemy
 
+var health_last_fight: float = Game.health
+
 var player_alive = true
 var enemy_alive = true
 var melt = false
@@ -118,6 +120,7 @@ func attack_enemy() -> void:
 	enemy_health -= damage_taken
 	Inventories.equipment.weapon.on_hit.call(enemy, damage_taken)
 	if enemy_health <= 0:
+		health_last_fight = Game.health
 		enemy_alive = false
 		melt = true
 		if Game.haptics_enabled:
@@ -159,8 +162,25 @@ func attack_enemy() -> void:
 				Game.highest_completed_level = Game.game_level.id + 1
 				Game.gems += 1
 			print("added " + str(roundi(Game.temp_exp_gained)) + " xp and " + str(Game.temp_drops_gained.size()) + " items")
-			$UI/Main/YouWin.text = "YOU WIN!\n\nYou gained +" + str(roundi(Game.temp_exp_gained)) + " XP\nYou also got +" + str(Game.temp_drops_gained.size()) + " items."
+			
+			var exp_text = "You got:\n- +" + str(roundi(Game.temp_exp_gained)) + " XP"
+			var drop_counts = {}
+			for item_type in Game.temp_drops_gained:
+				if drop_counts.has(item_type):
+					drop_counts[item_type].amount += 1
+				else:
+					var stack = ItemStack.new()
+					stack.type = item_type
+					stack.amount = 1
+					drop_counts[item_type] = stack
+			var drops_text = "\n"
+			for stack in drop_counts.values():
+				drops_text += "- x" + str(stack.amount) + " " + stack.type.name + "\n"
+			$UI/Main/YouGot/Label.text = exp_text + drops_text
+			$UI/Main/DoubleRewards.visible = true
 			$UI/Main/YouWin.visible = true
+			$UI/Main/YouGot.visible = true
+			
 			$UI/Main/LevelText.visible = false
 			$UI/Main/Consumable.visible = false
 			$UI/Main/Level.visible = false
@@ -172,8 +192,9 @@ func attack_enemy() -> void:
 			$UI/Main/MagicProgressBar.visible = false
 			$UI/Main/EnemyHealthProgressBar.visible = false
 			$UI/Main/EnemyEffects.visible = false
-			await get_tree().create_timer(3.25).timeout
-			get_tree().change_scene_to_file("res://scenes/menu.tscn")
+			
+			#await get_tree().create_timer(3.25).timeout
+			#get_tree().change_scene_to_file("res://scenes/menu.tscn")
 		#$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/victory.mp3"))
 
 var dead = preload("res://assets/sprites/bad.png")
@@ -219,6 +240,7 @@ func attack_player() -> void:
 			$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/tone.wav"))
 		if Game.haptics_enabled:
 			Input.vibrate_handheld(300, 0.9)
+
 func _on_player_timer_timeout() -> void:
 	attack_enemy()
 
@@ -238,3 +260,6 @@ func _on_effect_timer_timeout() -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+func _on_double_rewards_pressed() -> void:
+	Game.load_rewarded_ad("ca-app-pub-4596716586585952/4084680311")

@@ -72,6 +72,7 @@ func refresh_menu() -> void:
 		outfit.frames = 5
 		for i in range(outfit.frames):
 			outfit.set_frame_texture(i, load("res://assets/sprites/c" + str(i + 1) + "_" + Inventories.equipment.armor.texture_id + ".png"))
+			#print("c" + str(i + 1) + "_" + Inventories.equipment.armor.texture_id + ".png")
 			outfit.set_frame_duration(i, 0.25)
 		$UI/Main/TextureRect.texture = outfit
 	

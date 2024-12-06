@@ -14,7 +14,7 @@ func _init() -> void:
 	wooden_sword.description = "+{attack} DMG, ol' reliable."
 	wooden_sword.name = "Wooden Sword"
 	wooden_sword.upgrade_message = "Increases damage by 10, increases XP earned by 10% per monster killed."
-	wooden_sword.max_level = 10
+	wooden_sword.max_level = 20
 	wooden_sword.damage = func():
 		return 5 + (Game.get_current_weapon_level() * 10)
 	wooden_sword.on_kill = func(enemy: Enemy):

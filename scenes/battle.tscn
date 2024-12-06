@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=45 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
@@ -77,6 +77,45 @@ border_color = Color(0.737193, 0.737193, 0.737193, 1)
 line_spacing = 12.0
 font = ExtResource("4_ply01")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_b64xe"]
+line_spacing = 24.0
+font = ExtResource("4_ply01")
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dnbbd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3s4r"]
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mrg2"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j5be"]
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v56pd"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]
 
@@ -218,15 +257,15 @@ script = ExtResource("2_06lu2")
 
 [node name="Panel" type="Panel" parent="UI/Main"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.337
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.337
 offset_left = -320.0
-offset_top = -520.0
+offset_top = -311.36
 offset_right = 320.0
-offset_bottom = 104.0
+offset_bottom = 312.64
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a11u7")
@@ -236,13 +275,13 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_c73m3")
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.512
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.512
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -255.68
+offset_left = -248.0
 offset_top = -256.0
-offset_right = 248.32
+offset_right = 256.0
 offset_bottom = 208.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -290,9 +329,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -288.0
-offset_top = -18.5
+offset_top = -10.5
 offset_right = 288.0
-offset_bottom = 82.5
+offset_bottom = 90.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "You died in the forest, your adventure is done."
@@ -485,24 +524,70 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_tr28y")
 [node name="YouWin" type="Label" parent="UI/Main"]
 visible = false
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.337
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -296.0
-offset_top = -448.0
-offset_right = 280.0
+anchor_bottom = 0.337
+offset_left = -284.04
+offset_top = -271.36
+offset_right = 284.04
+offset_bottom = -207.36
 grow_horizontal = 2
 grow_vertical = 2
-text = "YOU WIN!
-
-You gained +69 XP
-You also gained +69 items. "
+text = "YOU WIN!"
 label_settings = SubResource("LabelSettings_pecp7")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="YouGot" type="ScrollContainer" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.337
+anchor_right = 0.5
+anchor_bottom = 0.337
+offset_left = -296.0
+offset_top = -199.36
+offset_right = 280.0
+offset_bottom = 232.64
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Main/YouGot"]
+custom_minimum_size = Vector2(576, 300)
+layout_mode = 2
+text = "
+"
+label_settings = SubResource("LabelSettings_b64xe")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DoubleRewards" type="Button" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.337
+anchor_right = 0.5
+anchor_bottom = 0.337
+offset_left = -296.0
+offset_top = 224.64
+offset_right = 296.0
+offset_bottom = 296.64
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_ply01")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dnbbd")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_q3s4r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2mrg2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6j5be")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v56pd")
+text = "Watch an ad to double rewards!"
 
 [node name="Consumable" type="Button" parent="UI/Main"]
 layout_mode = 1
@@ -617,6 +702,7 @@ autostart = true
 
 [connection signal="mouse_entered" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_exited"]
+[connection signal="pressed" from="UI/Main/DoubleRewards" to="." method="_on_double_rewards_pressed"]
 [connection signal="pressed" from="UI/Main/Consumable" to="." method="_on_consumable_pressed"]
 [connection signal="pressed" from="UI/Main/Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="PlayerTimer" to="." method="_on_player_timer_timeout"]

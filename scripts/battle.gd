@@ -80,19 +80,19 @@ func start_battle() -> void:
 	print("your hp right now: " + str(Game.health))
 	
 func _process(delta: float) -> void:
-	for children in $UI/Main/EnemyEffects/PanelContainer/HBoxContainer.get_children():
+	for children in $UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.get_children():
 		children.queue_free()
 	if enemy.active_status_effects.is_empty():
-		$UI/Main/EnemyEffects.visible = false
+		$UI/Main/Panel/EnemyEffects.visible = false
 	else:
-		$UI/Main/EnemyEffects.visible = true
+		$UI/Main/Panel/EnemyEffects.visible = true
 	for effect in enemy.active_status_effects:
 		var effect_resource = load("res://scenes/effect.tscn").instantiate()
 		effect_resource.texture = effect.texture
-		$UI/Main/EnemyEffects/PanelContainer/HBoxContainer.add_child(effect_resource)
+		$UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.add_child(effect_resource)
 	$UI/Main/Consumable/ProgressBar.value = (($ConsumableTimer.time_left / $ConsumableTimer.wait_time) * 100.0)
-	$UI/Main/EnemyHealthProgressBar.max_value = enemy_max_health
-	$UI/Main/EnemyHealthProgressBar.value = enemy_health
+	$UI/Main/Panel/EnemyHealthProgressBar.max_value = enemy_max_health
+	$UI/Main/Panel/EnemyHealthProgressBar.value = enemy_health
 	$UI/Main/HealthProgressBar.max_value = max_health
 	$UI/Main/HealthProgressBar.value = Game.health
 	$UI/Main/MagicProgressBar.value = magic
@@ -180,6 +180,8 @@ func attack_enemy() -> void:
 			$UI/Main/DoubleRewards.visible = true
 			$UI/Main/YouWin.visible = true
 			$UI/Main/YouGot.visible = true
+			$UI/Main/Or.visible = true
+			$UI/Main/RegularRewards.visible = true
 			
 			$UI/Main/LevelText.visible = false
 			$UI/Main/Consumable.visible = false
@@ -190,8 +192,8 @@ func attack_enemy() -> void:
 			$UI/Main/MP2.visible = false
 			$UI/Main/HealthProgressBar.visible = false
 			$UI/Main/MagicProgressBar.visible = false
-			$UI/Main/EnemyHealthProgressBar.visible = false
-			$UI/Main/EnemyEffects.visible = false
+			$UI/Main/Panel/EnemyHealthProgressBar.visible = false
+			$UI/Main/Panel/EnemyEffects.visible = false
 			
 			#await get_tree().create_timer(3.25).timeout
 			#get_tree().change_scene_to_file("res://scenes/menu.tscn")
@@ -263,3 +265,6 @@ func _on_back_pressed() -> void:
 
 func _on_double_rewards_pressed() -> void:
 	Game.load_rewarded_ad("ca-app-pub-4596716586585952/4084680311")
+
+func _on_regular_rewards_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

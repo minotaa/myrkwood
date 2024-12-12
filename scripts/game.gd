@@ -185,7 +185,7 @@ func _ready() -> void:
 				"direction": "center",
 				"text_size": 16
 			})
-		if (rewarded_item.type == "DoubledRewards"):
+		if (rewarded_item.type == "DoubledReward"):
 			exp += Game.temp_exp_gained
 			for item in Game.temp_drops_gained:
 				var item_stack = ItemStack.new()

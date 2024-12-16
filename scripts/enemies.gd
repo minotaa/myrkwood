@@ -37,6 +37,7 @@ func _ready() -> void:
 	baubles.attack = 8.0
 	baubles.defense = 3.0
 	baubles.exp = 5.0
+	baubles.location = "forest"
 	baubles.texture = load("res://assets/sprites/baubles.png")
 	baubles.on_die = func ():
 		ToastParty.show({
@@ -60,6 +61,7 @@ func _ready() -> void:
 	slime.attack = 20.0
 	slime.defense = 1.0
 	slime.exp = 15.0
+	slime.location = "forest"
 	slime.texture = load("res://assets/sprites/slime.png")
 	slime.on_die = func ():
 		var amount = randi_range(1, 5)
@@ -85,6 +87,7 @@ func _ready() -> void:
 	tadpole.attack = 35.0
 	tadpole.defense = 1.5
 	tadpole.exp = 45.0
+	tadpole.location = "forest"
 	tadpole.on_die = func ():
 		var amount = randi_range(1, 3)
 		ToastParty.show({
@@ -110,6 +113,7 @@ func _ready() -> void:
 	fungal_tadpole.attack = 50.0
 	fungal_tadpole.defense = 5.0
 	fungal_tadpole.exp = 100.0
+	fungal_tadpole.location = "forest"
 	fungal_tadpole.texture = load("res://assets/sprites/tadpole_fungus.png")
 	fungal_tadpole.on_die = func():
 		pass
@@ -125,6 +129,7 @@ func _ready() -> void:
 	minos_fly_trap.attack = 75.0
 	minos_fly_trap.defense = 0.0
 	minos_fly_trap.exp = 500.0
+	minos_fly_trap.location = "forest"
 	minos_fly_trap.texture = load("res://assets/sprites/minos_fly_trap.png")
 	minos_fly_trap.on_die = func():
 		var amount = randi_range(1, 2)
@@ -160,9 +165,77 @@ func _ready() -> void:
 	minos_shroom.attack = 30.0
 	minos_shroom.defense = 0.0
 	minos_shroom.exp = 0.0
+	minos_shroom.location = "forest"
 	minos_shroom.texture = load("res://assets/sprites/mino_shroom.png")
 	minos_shroom.on_die = func():
 		pass
 	enemies.append(minos_shroom)
 	
+	var frog = Enemy.new()
+	frog.id = 6
+	frog.name = "Frog"
+	frog.description = "Grown up version of the tadpole, surprisingly pretty chill."
+	frog.weight = 75.0
+	frog.health = 400.0
+	frog.attack_speed = 2.25
+	frog.attack = 30.0
+	frog.defense = 10.0
+	frog.exp = 200.0
+	frog.location = "sea"
+	frog.texture = load("res://assets/sprites/frog.png")
+	frog.on_die = func():
+		var amount = randi_range(5, 10)
+		ToastParty.show({
+			"text": "You also got x" + str(amount) + " Frogspawn!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
+		for i in amount:
+			Game.temp_drops_gained.append(Items.get_item_by_id(6))
+		await get_tree().create_timer(0.1).timeout
+		amount = randi_range(2, 15)
+		ToastParty.show({
+			"text": "You also got x" + str(amount) + " Blades of Grass!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
+		for i in amount:
+			Game.temp_drops_gained.append(Items.get_item_by_id(8))
+	enemies.append(frog)
+		
+	var warm_frog = Enemy.new()
+	warm_frog.id = 7
+	warm_frog.name = "Warm Frog"
+	warm_frog.description = "A frog that comes from warmer climate lands, also is poisonous for some reason."
+	warm_frog.weight = 50.0
+	warm_frog.health = 400.0
+	warm_frog.attack_speed = 2.0
+	warm_frog.attack = 28.9
+	warm_frog.defense = 0.0
+	warm_frog.exp = 250.0
+	warm_frog.location = "sea"
+	warm_frog.texture = load("res://assets/sprites/warm_frog.png")
+	warm_frog.on_attack = func():
+		var found = false
+		for effect in Game.active_status_effects:
+			if effect.id == 1:
+				found = true
+		if not found:
+			var poison = Effect.new()
+			poison.duration = 5.0
+			poison.id = 1
+			poison.name = "Poison"
+			poison.texture = load("res://assets/sprites/poison.png")
+			poison.on_update = func():
+				var damage = (Game.get_max_health() * 0.1)
+				Game.health -= damage
+				print("You were poisoned a bit (" + str(damage) + ")") 
+			Game.apply_status_effect(poison)
+	enemies.append(warm_frog)
 	print("enemies added")

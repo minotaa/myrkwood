@@ -546,6 +546,40 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Effects" type="Control" parent="UI/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = 437.0
+offset_right = 280.0
+offset_bottom = 493.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Main/Effects"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -28.0
+offset_right = 8.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yahae")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/Effects/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+alignment = 1
+
 [node name="YouGot" type="ScrollContainer" parent="UI/Main"]
 layout_mode = 1
 anchors_preset = -1
@@ -644,9 +678,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -96.0
-offset_top = 256.0
+offset_top = 224.0
 offset_right = 96.0
-offset_bottom = 448.0
+offset_bottom = 416.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_v7i3o")
@@ -665,13 +699,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -88.0
+offset_left = -96.0
 offset_top = -40.0
+offset_right = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "x100"
 label_settings = SubResource("LabelSettings_vceff")
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/Main/Consumable"]

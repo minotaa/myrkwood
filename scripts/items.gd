@@ -235,4 +235,6 @@ func _init() -> void:
 		Game.health = min(Game.health + 100, Game.get_max_health())
 	items.append(medium_healing_potion)
 	
+	
+	
 	print("items added")

@@ -123,3 +123,29 @@ func _ready() -> void:
 	seven.id = 7
 	seven.name = "The Black Lagoon"
 	levels.append(seven)
+
+	var eight = Level.new()
+	eight.id = 8
+	eight.name = "Heket"
+	eight.enemy_list = [
+		Enemies.get_by_id(2),
+		Enemies.get_by_id(2),
+		Enemies.get_by_id(2),
+		Enemies.get_by_id(3),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+	]
+	levels.append(eight)
+	
+	var nine = Level.new()
+	nine.id = 9
+	nine.name = "The Apothecary"
+	nine.enemy_list = [
+		Enemies.get_by_id(7),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(7)
+	]
+	levels.append(nine)

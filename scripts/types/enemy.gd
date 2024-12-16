@@ -29,12 +29,13 @@ func update_status_effects() -> void:
 			effect.on_expire.call(self)
 			active_status_effects.erase(effect)
 
-func on_attack() -> void:
+var on_attack: Callable = func():
 	pass
 
-var on_die: Callable
+var on_die: Callable = func():
+	pass
 	
-func on_damage() -> void:
+var on_damage: Callable = func():
 	pass
 
 func _to_string() -> String:

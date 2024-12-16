@@ -82,7 +82,9 @@ func start_battle() -> void:
 func _process(delta: float) -> void:
 	for children in $UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.get_children():
 		children.queue_free()
-	if enemy.active_status_effects.is_empty():
+	for children in $UI/Main/Effects/PanelContainer/HBoxContainer.get_children():
+		children.queue_free()
+	if enemy.active_status_effects.is_empty() or not enemy_alive:
 		$UI/Main/Panel/EnemyEffects.visible = false
 	else:
 		$UI/Main/Panel/EnemyEffects.visible = true
@@ -90,6 +92,16 @@ func _process(delta: float) -> void:
 		var effect_resource = load("res://scenes/effect.tscn").instantiate()
 		effect_resource.texture = effect.texture
 		$UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.add_child(effect_resource)
+	
+	if Game.active_status_effects.is_empty() or not player_alive or melt:
+		$UI/Main/Effects.visible = false
+	else:
+		$UI/Main/Effects.visible = true
+	for effect in Game.active_status_effects:
+		var effect_resource = load("res://scenes/effect.tscn").instantiate()
+		effect_resource.texture = effect.texture
+		$UI/Main/Effects/PanelContainer/HBoxContainer.add_child(effect_resource)
+
 	$UI/Main/Consumable/ProgressBar.value = (($ConsumableTimer.time_left / $ConsumableTimer.wait_time) * 100.0)
 	$UI/Main/Panel/EnemyHealthProgressBar.max_value = enemy_max_health
 	$UI/Main/Panel/EnemyHealthProgressBar.value = enemy_health
@@ -115,6 +127,7 @@ func attack_enemy() -> void:
 		$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/hit.wav"))
 	if Game.haptics_enabled:
 		Input.vibrate_handheld(100)
+	enemy.on_damage.call()
 	var damage_multiplier = 1 - (enemy_defense / (enemy_defense + 100))
 	var damage_taken = attack * damage_multiplier
 	enemy_health -= damage_taken
@@ -181,7 +194,6 @@ func attack_enemy() -> void:
 			$UI/Main/YouWin.visible = true
 			$UI/Main/YouGot.visible = true
 			$UI/Main/Or.visible = true
-			$UI/Main/RegularRewards.visible = true
 			
 			$UI/Main/LevelText.visible = false
 			$UI/Main/Consumable.visible = false
@@ -195,7 +207,8 @@ func attack_enemy() -> void:
 			$UI/Main/Panel/EnemyHealthProgressBar.visible = false
 			$UI/Main/Panel/EnemyEffects.visible = false
 			
-			#await get_tree().create_timer(3.25).timeout
+			await get_tree().create_timer(2.35).timeout
+			$UI/Main/RegularRewards.visible = true
 			#get_tree().change_scene_to_file("res://scenes/menu.tscn")
 		#$AudioStreamPlayer.get_stream_playback().play_stream(load("res://assets/sounds/victory.mp3"))
 
@@ -206,6 +219,7 @@ func attack_player() -> void:
 		return
 	var damage_multiplier = 1 - (defense / (defense + 100))
 	var damage_taken = enemy_attack * damage_multiplier
+	enemy.on_attack.call()
 	Game.health -= damage_taken
 	if Game.health <= 0:
 		if Game.sounds_enabled:
@@ -223,8 +237,8 @@ func attack_player() -> void:
 		$UI/Main/MP2.visible = false
 		$UI/Main/HealthProgressBar.visible = false
 		$UI/Main/MagicProgressBar.visible = false
-		$UI/Main/EnemyHealthProgressBar.visible = false
-		$UI/Main/EnemyEffects.visible = false
+		$UI/Main/Panel/EnemyHealthProgressBar.visible = false
+		$UI/Main/Panel/EnemyEffects.visible = false
 		var messages = [
 			"You were never found.", 
 			"You went off the straight path.", 

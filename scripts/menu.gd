@@ -68,12 +68,7 @@ func refresh_menu() -> void:
 		$UI/Main/TabContainer/Loadout/Armor/Name.text = Inventories.equipment.armor.name
 		$UI/Main/TabContainer/Loadout/Armor/Description.text = Inventories.equipment.armor.description
 	
-		var outfit = AnimatedTexture.new()
-		outfit.frames = 5
-		for i in range(outfit.frames):
-			outfit.set_frame_texture(i, load("res://assets/sprites/c" + str(i + 1) + "_" + Inventories.equipment.armor.texture_id + ".png"))
-			#print("c" + str(i + 1) + "_" + Inventories.equipment.armor.texture_id + ".png")
-			outfit.set_frame_duration(i, 0.25)
+		var outfit = load("res://assets/sprites/c" + str(1) + "_" + Inventories.equipment.armor.texture_id + ".png")
 		$UI/Main/TextureRect.texture = outfit
 	
 	if Inventories.equipment.consumable != null and Inventories.equipment.get_item_stack(Inventories.equipment.consumable) == null:

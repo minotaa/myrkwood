@@ -7,7 +7,7 @@ var magic: float = 100.0
 var exp: float = 0.0
 var gems: int = 0
 var highest_completed_level: int = 0
-var active_status_effects: Array[EnemyEffect] = []
+var active_status_effects: Array[Effect] = []
 
 var sounds_enabled: bool = true
 var haptics_enabled: bool = false
@@ -32,9 +32,8 @@ func update_status_effects() -> void:
 	for effect in active_status_effects:
 		if effect.on_update:
 			effect.on_update.call()
-			
-		effect.timer -= 1.0
-		if effect.timer <= 0:
+		effect.duration -= 1.0
+		if effect.duration <= 0:
 			effect.on_expire.call()
 			active_status_effects.erase(effect)
 

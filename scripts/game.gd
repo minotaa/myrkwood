@@ -25,16 +25,16 @@ var _rewarded_ad : RewardedAd
 var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
 
 func apply_status_effect(effect: Effect) -> void:
-	effect.on_apply.call()
+	effect.on_apply.call(effect)
 	active_status_effects.append(effect)
 
 func update_status_effects() -> void:
 	for effect in active_status_effects:
 		if effect.on_update:
-			effect.on_update.call()
+			effect.on_update.call(effect)
 		effect.duration -= 1.0
 		if effect.duration <= 0:
-			effect.on_expire.call()
+			effect.on_expire.call(effect)
 			active_status_effects.erase(effect)
 
 func number_to_roman(num: int) -> String:

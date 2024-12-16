@@ -17,16 +17,16 @@ var exp: float = 0.0
 var location: String = "forest"
 
 func apply_status_effect(effect: EnemyEffect) -> void:
-	effect.on_apply.call(self)
+	effect.on_apply.call(self, effect)
 	active_status_effects.append(effect)
 
 func update_status_effects() -> void:
 	for effect in active_status_effects:
 		if effect.on_update:
-			effect.on_update.call(self)
+			effect.on_update.call(self, effect)
 		effect.duration -= 1.0
 		if effect.duration <= 0:
-			effect.on_expire.call(self)
+			effect.on_expire.call(self, effect)
 			active_status_effects.erase(effect)
 
 var on_attack: Callable = func():

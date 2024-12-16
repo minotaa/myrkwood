@@ -6,9 +6,9 @@ var duration: float = 0.0
 var texture: Texture 
 var id: int
 
-var on_apply: Callable = func():
+var on_apply: Callable = func(effect: Effect):
 	pass
-var on_expire: Callable = func():
+var on_expire: Callable = func(effect: Effect):
 	pass
-var on_update: Callable = func():
+var on_update: Callable = func(effect: Effect):
 	pass

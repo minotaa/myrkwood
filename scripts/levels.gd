@@ -143,9 +143,14 @@ func _ready() -> void:
 	nine.id = 9
 	nine.name = "The Apothecary"
 	nine.enemy_list = [
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(6),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
 		Enemies.get_by_id(7),
-		Enemies.get_by_id(6),
-		Enemies.get_by_id(6),
-		Enemies.get_by_id(7)
+		Enemies.get_by_id(7),
+		Enemies.get_by_id(7),
 	]
 	levels.append(nine)

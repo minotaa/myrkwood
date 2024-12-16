@@ -55,6 +55,7 @@ func _on_consumable_pressed() -> void:
 		$UI/Main/Consumable/Label.text = "x" + str(Inventories.equipment.get_item_stack(Inventories.equipment.consumable).amount)
 	
 func start_battle() -> void:
+	health_last_fight = Game.health
 	player_alive = true
 	melt = false
 	enemy_alive = true
@@ -78,6 +79,7 @@ func start_battle() -> void:
 	print("battle started:")
 	print("enemy: " + str(enemy))
 	print("your hp right now: " + str(Game.health))
+	print("your hp last fight: " + str(health_last_fight))
 	
 func _process(delta: float) -> void:
 	for children in $UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.get_children():
@@ -93,10 +95,16 @@ func _process(delta: float) -> void:
 		effect_resource.texture = effect.texture
 		$UI/Main/Panel/EnemyEffects/PanelContainer/HBoxContainer.add_child(effect_resource)
 	
-	if Game.active_status_effects.is_empty() or not player_alive or melt:
+	if Game.active_status_effects.is_empty():
 		$UI/Main/Effects.visible = false
 	else:
 		$UI/Main/Effects.visible = true
+	if not enemy_alive or melt:
+		$UI/Main/Effects.visible = false
+		$UI/Main/Panel/EnemyEffects.visible = false
+	if not player_alive or melt:
+		$UI/Main/Effects.visible = false
+		$UI/Main/Panel/EnemyEffects.visible = false
 	for effect in Game.active_status_effects:
 		var effect_resource = load("res://scenes/effect.tscn").instantiate()
 		effect_resource.texture = effect.texture
@@ -133,7 +141,6 @@ func attack_enemy() -> void:
 	enemy_health -= damage_taken
 	Inventories.equipment.weapon.on_hit.call(enemy, damage_taken)
 	if enemy_health <= 0:
-		health_last_fight = Game.health
 		enemy_alive = false
 		melt = true
 		if Game.haptics_enabled:

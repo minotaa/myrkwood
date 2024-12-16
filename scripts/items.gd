@@ -86,7 +86,7 @@ func _init() -> void:
 				bleed.id = 0
 				bleed.name = "Bleeding"
 				bleed.texture = load("res://assets/sprites/bleed.png")
-				bleed.on_update = func(enemy: Enemy):
+				bleed.on_update = func(enemy: Enemy, effect: EnemyEffect):
 					enemy.health -= 5.0
 					print(enemy.name + " bled a little bit")
 				enemy.apply_status_effect(bleed)

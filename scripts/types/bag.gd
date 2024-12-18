@@ -41,9 +41,7 @@ func take_item(item: ItemType, amount: int) -> void:
 
 func set_list_from_save(_list: Array):
 	for value in _list:
-		var item = ItemStack.new()
-		item.amount = value.amount
-		item.type = Items.get_item_by_id(value.id)
+		var item = ItemStack.new(Items.get_item_by_id(value.id), value.amount)
 		if value.has("data"):
 			item.data = value["data"]
 		list.append(item)

@@ -115,12 +115,8 @@ func get_consumable_id():
 	
 func get_game_save_data() -> Dictionary:
 	if Inventories.equipment.list.is_empty():
-		var wooden_sword = ItemStack.new()
-		wooden_sword.type = Items.get_item_by_id(0)
-		wooden_sword.amount = 1
-		var hoodie = ItemStack.new()
-		hoodie.type = Items.get_item_by_id(1)
-		hoodie.amount = 1
+		var wooden_sword = ItemStack.new(Items.get_item_by_id(0), 1)
+		var hoodie = ItemStack.new(Items.get_item_by_id(1), 1)
 		Inventories.equipment.list.append(wooden_sword)
 		Inventories.equipment.list.append(hoodie)
 	
@@ -187,9 +183,7 @@ func _ready() -> void:
 		if (rewarded_item.type == "DoubledReward"):
 			exp += Game.temp_exp_gained
 			for item in Game.temp_drops_gained:
-				var item_stack = ItemStack.new()
-				item_stack.amount = 1
-				item_stack.type = item
+				var item_stack = ItemStack.new(item, 1)
 				Inventories.drops.add_item(item_stack)
 			ToastParty.show({
 				"text": "Doubled your rewards for watching an ad!",

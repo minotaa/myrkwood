@@ -25,9 +25,7 @@ func _process(delta: float) -> void:
 func _on_button_pressed() -> void:
 	if item != null:
 		Game.items_crafted += 1
-		var item_stack = ItemStack.new()
-		item_stack.type = item
-		item_stack.amount = 1
+		var item_stack = ItemStack.new(item, 1)
 		for req in item.requirement:
 			if Inventories.drops.has_item(req.type):
 				Inventories.drops.take_item(req.type, req.amount)

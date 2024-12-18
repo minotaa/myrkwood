@@ -173,9 +173,7 @@ func attack_enemy() -> void:
 				Input.vibrate_handheld(500, 1.0)
 			Game.save_game(Game.get_game_save_data(), "won")
 			for item in Game.temp_drops_gained:
-				var item_stack = ItemStack.new()
-				item_stack.amount = 1
-				item_stack.type = item
+				var item_stack = ItemStack.new(item, 1)
 				Inventories.drops.add_item(item_stack)
 		
 			if Game.highest_completed_level <= Game.game_level.id:
@@ -189,9 +187,7 @@ func attack_enemy() -> void:
 				if drop_counts.has(item_type):
 					drop_counts[item_type].amount += 1
 				else:
-					var stack = ItemStack.new()
-					stack.type = item_type
-					stack.amount = 1
+					var stack = ItemStack.new(item_type, 1)
 					drop_counts[item_type] = stack
 			var drops_text = "\n"
 			for stack in drop_counts.values():

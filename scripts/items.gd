@@ -91,13 +91,9 @@ func _init() -> void:
 					print(enemy.name + " bled a little bit")
 				enemy.apply_status_effect(bleed)
 	glass_knife.craftable = true
-	var min_requirement = ItemStack.new()
-	min_requirement.amount = 1
-	min_requirement.type = get_item_by_id(3)
+	var min_requirement = ItemStack.new(get_item_by_id(3), 1)
 	glass_knife.min_requirement = [min_requirement]
-	var requirement = ItemStack.new()
-	requirement.amount = 5
-	requirement.type = get_item_by_id(3)
+	var requirement = ItemStack.new(get_item_by_id(3), 5)
 	glass_knife.requirement = [requirement]
 	glass_knife.only_craft_once = true
 	items.append(glass_knife)
@@ -114,13 +110,9 @@ func _init() -> void:
 	small_healing_potion.cooldown_seconds = 5
 	small_healing_potion.infinite = false
 	small_healing_potion.craftable = true
-	min_requirement = ItemStack.new()
-	min_requirement.amount = 1
-	min_requirement.type = get_item_by_id(2)
+	min_requirement = ItemStack.new(get_item_by_id(2), 1)
 	small_healing_potion.min_requirement = [min_requirement]
-	requirement = ItemStack.new()
-	requirement.amount = 5
-	requirement.type = get_item_by_id(2)
+	requirement = ItemStack.new(get_item_by_id(2), 5)
 	small_healing_potion.requirement = [requirement]
 	small_healing_potion.on_consume = func():
 		Game.health = min(Game.health + 25, Game.get_max_health())
@@ -149,13 +141,9 @@ func _init() -> void:
 	froggy_armor.health = 100.0
 	froggy_armor.craftable = true
 	froggy_armor.only_craft_once = true
-	min_requirement = ItemStack.new()
-	min_requirement.amount = 1
-	min_requirement.type = get_item_by_id(6)
+	min_requirement = ItemStack.new(get_item_by_id(6), 1)
 	froggy_armor.min_requirement = [min_requirement]
-	requirement = ItemStack.new()
-	requirement.amount = 15
-	requirement.type = get_item_by_id(6)
+	requirement = ItemStack.new(get_item_by_id(6), 15)
 	froggy_armor.requirement = [requirement]
 	items.append(froggy_armor)
 
@@ -192,15 +180,9 @@ func _init() -> void:
 	axe_of_the_dionaea.upgrade_message = "Increases damage by 2, increases attack speed by 0.1."
 	axe_of_the_dionaea.max_level = 5
 	
-	var flytrap_req = ItemStack.new()
-	var blade_of_grass_min_req = ItemStack.new()
-	var blade_of_grass_req = ItemStack.new()
-	flytrap_req.type = get_item_by_id(9)
-	flytrap_req.amount = 3
-	blade_of_grass_min_req.type = get_item_by_id(8)
-	blade_of_grass_req.type = get_item_by_id(8)
-	blade_of_grass_min_req.amount = 1
-	blade_of_grass_req.amount = 5
+	var flytrap_req = ItemStack.new(get_item_by_id(9), 3)
+	var blade_of_grass_min_req = ItemStack.new(get_item_by_id(8), 1)
+	var blade_of_grass_req = ItemStack.new(get_item_by_id(8), 5)
 	
 	axe_of_the_dionaea.craftable = true
 	axe_of_the_dionaea.only_craft_once = true
@@ -226,15 +208,78 @@ func _init() -> void:
 	medium_healing_potion.infinite = false
 	medium_healing_potion.craftable = true
 	
-	var potion_req = ItemStack.new()
-	potion_req.type = get_item_by_id(5)
-	potion_req.amount = 1
+	var potion_req = ItemStack.new(get_item_by_id(5), 1)
 	medium_healing_potion.min_requirement = [blade_of_grass_min_req]
 	medium_healing_potion.requirement = [potion_req, blade_of_grass_min_req]
 	medium_healing_potion.on_consume = func():
 		Game.health = min(Game.health + 100, Game.get_max_health())
 	items.append(medium_healing_potion)
 	
+	var poison_gland = ItemType.new()
+	poison_gland.id = 12
+	poison_gland.name = "Poison Orb"
+	poison_gland.description = "A poisonous gland, dropped from a felled poisonous monster."
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(224.0, 0.0, 16.0, 16.0)
+	poison_gland.texture = atlas
+	items.append(poison_gland)
 	
+	var venomous_axe = Sword.new()
+	venomous_axe.id = 13
+	venomous_axe.name = "Venomous Axe"
+	venomous_axe.description = "+{attack} DMG, an upgraded axe that can cause poison on swing."
+	venomous_axe.base_damage = 200
+	venomous_axe.base_attack_speed = 1.2
+	venomous_axe.upgrade_message = "Increases duration of Poison by 1s, poison chance by 5%."
+	venomous_axe.max_level = 5
+	venomous_axe.craftable = true
+	venomous_axe.only_craft_once = true
+	venomous_axe.min_requirement = [ItemStack.new(get_item_by_id(12), 1)]
+	venomous_axe.requirement = [
+		ItemStack.new(get_item_by_id(12), 3), 
+		ItemStack.new(get_item_by_id(10), 1), 
+		ItemStack.new(get_item_by_id(6), 100)
+	]
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(208.0, 0.0, 16.0, 16.0)
+	venomous_axe.texture = atlas
+	venomous_axe.on_hit = func(enemy: Enemy, final_damage: float):
+		var found = false
+		for effect in enemy.active_status_effects:
+			if effect.id == 1:
+				found = true
+		var chance = 0.35 + (Game.get_current_weapon_level() * 0.05)
+		if randf() <= chance:
+			if not found:
+				var poison = EnemyEffect.new()
+				poison.duration = 5.0 + (Game.get_current_weapon_level())
+				poison.id = 1
+				poison.name = "Poison"
+				poison.texture = load("res://assets/sprites/poison.png")
+				poison.on_update = func(enemy: Enemy, effect: EnemyEffect):
+					if int(effect.duration) % 2 == 0:
+						var damage = (enemy.health * 0.1)
+						enemy.health -= damage
+						print(enemy.name + " was poisoned a bit (" + str(damage) + ")") 
+				enemy.apply_status_effect(poison)
+	items.append(venomous_axe)
 	
+	var bullfrog_armor = Armor.new()
+	bullfrog_armor.id = 14
+	bullfrog_armor.name = "Bullfrog Armor"
+	bullfrog_armor.description = "+200 HP, +75 DEF; Enhanced version of the Froggy Armor."
+	bullfrog_armor.texture_id = "bullfrog"
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(192.0, 0.0, 16.0, 16.0)
+	bullfrog_armor.texture = atlas
+	bullfrog_armor.defense = 75.0
+	bullfrog_armor.health = 200.0
+	bullfrog_armor.craftable = true
+	bullfrog_armor.only_craft_once = true
+	bullfrog_armor.min_requirement = [ItemStack.new(get_item_by_id(12), 1)]
+	bullfrog_armor.requirement = [ItemStack.new(get_item_by_id(12), 5), ItemStack.new(get_item_by_id(7), 1),  ItemStack.new(get_item_by_id(6), 100)]
+	items.append(bullfrog_armor)
 	print("items added")

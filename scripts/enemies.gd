@@ -184,7 +184,7 @@ func _ready() -> void:
 	frog.location = "sea"
 	frog.texture = load("res://assets/sprites/frog.png")
 	frog.on_die = func():
-		var amount = randi_range(5, 10)
+		var amount = randi_range(3, 6)
 		ToastParty.show({
 			"text": "You also got x" + str(amount) + " Frogspawn!",
 			"bgcolor": Color(0, 0, 0, 0.7),
@@ -196,7 +196,7 @@ func _ready() -> void:
 		for i in amount:
 			Game.temp_drops_gained.append(Items.get_item_by_id(6))
 		await get_tree().create_timer(0.1).timeout
-		amount = randi_range(2, 15)
+		amount = randi_range(3, 6)
 		ToastParty.show({
 			"text": "You also got x" + str(amount) + " Blades of Grass!",
 			"bgcolor": Color(0, 0, 0, 0.7),
@@ -221,6 +221,17 @@ func _ready() -> void:
 	warm_frog.exp = 250.0
 	warm_frog.location = "sea"
 	warm_frog.texture = load("res://assets/sprites/warm_frog.png")
+	warm_frog.on_die = func():
+		if randf() <= 0.2:
+			ToastParty.show({
+				"text": "RARE DROP! You also got a Poison Orb!",
+				"bgcolor": Color(0, 0, 0, 0.7),
+				"color": Color(1, 1, 1, 1),
+				"gravity": "bottom",
+				"direction": "center",
+				"text_size": 24
+			})
+			Game.temp_drops_gained.append(Items.get_item_by_id(12))
 	warm_frog.on_attack = func():
 		var found = false
 		for effect in Game.active_status_effects:
@@ -265,6 +276,16 @@ func _ready() -> void:
 		})
 		for i in amount:
 			Game.temp_drops_gained.append(Items.get_item_by_id(2))
+		if randf() <= 0.2:
+			ToastParty.show({
+				"text": "RARE DROP! You also got a Poison Orb!",
+				"bgcolor": Color(0, 0, 0, 0.7),
+				"color": Color(1, 1, 1, 1),
+				"gravity": "bottom",
+				"direction": "center",
+				"text_size": 24
+			})
+			Game.temp_drops_gained.append(Items.get_item_by_id(12))
 	poison_slime.on_attack = func():
 		var found = false
 		for effect in Game.active_status_effects:
@@ -277,10 +298,10 @@ func _ready() -> void:
 			poison.name = "Poison"
 			poison.texture = load("res://assets/sprites/poison.png")
 			poison.on_update = func(effect: Effect):
-				if int(effect.duration) % 2 == 0:
-					var damage = (Game.get_max_health() * 0.1)
-					Game.health -= damage
-					print("You were poisoned a bit (" + str(damage) + ")") 
+				#if int(effect.duration) % 2 == 0:
+				var damage = (Game.get_max_health() * 0.1)
+				Game.health -= damage
+				print("You were poisoned a bit (" + str(damage) + ")") 
 			Game.apply_status_effect(poison)
 	enemies.append(poison_slime)
 	print("enemies added")

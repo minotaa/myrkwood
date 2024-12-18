@@ -23,9 +23,7 @@ func add_fragile_item(item: ItemStack) -> bool:
 	if not is_full():
 		var space_left = get_max_capacity() - total_size()
 		var amount_to_add = min(space_left, item.amount)
-		var new_stack = ItemStack.new()
-		new_stack.type = item.type
-		new_stack.amount = amount_to_add
+		var new_stack = ItemStack.new(item.type, amount_to_add)
 		list.append(new_stack)
 		item.amount -= amount_to_add
 		return true

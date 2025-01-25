@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://fo1x20ewfiw8"]
+[gd_scene load_steps=39 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cep5ej2435hik" path="res://assets/minota.png" id="5_mm37a"]
 [ext_resource type="Shader" path="res://scripts/shaders/melt.gdshader" id="5_wwnh4"]
 [ext_resource type="Texture2D" uid="uid://bnxw0e4ir0pg" path="res://assets/sprites/slime.png" id="6_v2rec"]
+[ext_resource type="PackedScene" uid="uid://dxiu4knib3rxv" path="res://scenes/consumable.tscn" id="7_3wf0j"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="7_lmkk5"]
-[ext_resource type="Texture2D" uid="uid://b2hels20ykw5r" path="res://assets/sprites/null.png" id="7_yahae"]
 [ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="8_v7i3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a11u7"]
@@ -44,6 +44,11 @@ corner_radius_bottom_left = 4
 [sub_resource type="LabelSettings" id="LabelSettings_qd3wb"]
 font = ExtResource("1_2ey2a")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_1hw73"]
+line_spacing = 12.0
+font = ExtResource("4_ply01")
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_l03xe"]
 font = ExtResource("1_2ey2a")
@@ -121,66 +126,6 @@ border_color = Color(1, 1, 1, 1)
 line_spacing = 12.0
 font = ExtResource("4_ply01")
 font_size = 32
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66ngm"]
-content_margin_left = 24.0
-content_margin_top = 24.0
-content_margin_right = 24.0
-content_margin_bottom = 24.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03edq"]
-content_margin_left = 24.0
-content_margin_top = 24.0
-content_margin_right = 24.0
-content_margin_bottom = 24.0
-bg_color = Color(0.589096, 0.589096, 0.589095, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
-content_margin_left = 24.0
-content_margin_top = 24.0
-content_margin_right = 24.0
-content_margin_bottom = 24.0
-bg_color = Color(0.261113, 0.261113, 0.261113, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ni85"]
-content_margin_left = 24.0
-content_margin_top = 24.0
-content_margin_right = 24.0
-content_margin_bottom = 24.0
-bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_vceff"]
-font = ExtResource("4_ply01")
-font_size = 24
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yahae"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7i3o"]
-bg_color = Color(1, 1, 1, 0.639216)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66ngm"]
 
@@ -353,9 +298,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -288.0
-offset_top = -10.5
+offset_top = -7.5
 offset_right = 288.0
-offset_bottom = 90.5
+offset_bottom = 93.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "You died in the forest, your adventure is done."
@@ -363,6 +308,26 @@ label_settings = SubResource("LabelSettings_qd3wb")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="ArcadeFinalScore" type="Label" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Your final score is:
+300"
+label_settings = SubResource("LabelSettings_1hw73")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level" type="Label" parent="UI/Main"]
 texture_filter = 1
@@ -483,7 +448,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
 offset_top = 158.0
-offset_right = -180.0
+offset_right = -176.0
 offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -627,6 +592,30 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_6j5be")
 theme_override_styles/normal = SubResource("StyleBoxFlat_v56pd")
 text = "Watch an ad to double rewards!"
 
+[node name="Revive" type="Button" parent="UI/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.337
+anchor_right = 0.5
+anchor_bottom = 0.337
+offset_left = -320.0
+offset_top = 448.64
+offset_right = 320.0
+offset_bottom = 536.64
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_ply01")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dnbbd")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_q3s4r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2mrg2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6j5be")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v56pd")
+text = "Watch an ad for a second chance?"
+autowrap_mode = 2
+
 [node name="RegularRewards" type="Button" parent="UI/Main"]
 visible = false
 layout_mode = 1
@@ -664,69 +653,37 @@ offset_right = 284.04
 offset_bottom = 496.64
 grow_horizontal = 2
 grow_vertical = 2
-text = "or"
+text = "or..."
 label_settings = SubResource("LabelSettings_4ubn6")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Consumable" type="Button" parent="UI/Main"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Main"]
+custom_minimum_size = Vector2(640, 192)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
+offset_left = -320.0
 offset_top = 224.0
-offset_right = 96.0
+offset_right = 320.0
 offset_bottom = 416.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_v7i3o")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_66ngm")
-theme_override_styles/hover = SubResource("StyleBoxFlat_03edq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_22uqi")
-theme_override_styles/normal = SubResource("StyleBoxFlat_6ni85")
-icon = ExtResource("7_yahae")
-icon_alignment = 1
-expand_icon = true
+vertical_scroll_mode = 3
 
-[node name="Label" type="Label" parent="UI/Main/Consumable"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -40.0
-offset_right = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "x100"
-label_settings = SubResource("LabelSettings_vceff")
-horizontal_alignment = 2
-vertical_alignment = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/ScrollContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 24
+alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/Main/Consumable"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -88.0
-offset_right = 88.0
-offset_bottom = 88.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_yahae")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v7i3o")
-fill_mode = 3
-show_percentage = false
+[node name="Consumable" parent="UI/Main/ScrollContainer/HBoxContainer" instance=ExtResource("7_3wf0j")]
+layout_mode = 2
 
 [node name="Back" type="Button" parent="UI/Main"]
 layout_mode = 1
@@ -786,7 +743,6 @@ autostart = true
 [connection signal="mouse_exited" from="UI/Main/Panel/EnemyTexture" to="." method="_on_enemy_texture_mouse_exited"]
 [connection signal="pressed" from="UI/Main/DoubleRewards" to="." method="_on_double_rewards_pressed"]
 [connection signal="pressed" from="UI/Main/RegularRewards" to="." method="_on_regular_rewards_pressed"]
-[connection signal="pressed" from="UI/Main/Consumable" to="." method="_on_consumable_pressed"]
 [connection signal="pressed" from="UI/Main/Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="PlayerTimer" to="." method="_on_player_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

@@ -154,3 +154,18 @@ func _ready() -> void:
 		Enemies.get_by_id(7),
 	]
 	levels.append(nine)
+	
+	var ten = Level.new()
+	ten.id = 10
+	ten.name = "Glue"
+	ten.enemy_list = [
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8)
+	]
+	levels.append(ten)

@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqwhi7rnp3rbq"]
+
+[ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_j35gh"]
+[ext_resource type="Script" path="res://scripts/arcade_button.gd" id="2_4bdhy"]
+[ext_resource type="Texture2D" uid="uid://3sltbxo1jw6e" path="res://assets/sprites/star.png" id="3_gvp8r"]
+[ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="4_uheni"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi1b0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1eml1"]
+bg_color = Color(0.294028, 0.294028, 0.294028, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmobi"]
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay5qv"]
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5612s"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mydtf"]
+font = ExtResource("4_uheni")
+
+[node name="Arcade Level" type="Button"]
+texture_filter = 1
+custom_minimum_size = Vector2(624, 128)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.125
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_j35gh")
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mi1b0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1eml1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jmobi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ay5qv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5612s")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4bdhy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 536.0
+offset_top = 64.0
+offset_right = 592.0
+offset_bottom = 120.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_gvp8r")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -48.0
+offset_right = 84.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_gvp8r")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_gvp8r")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_gvp8r")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -41.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "5 enemies"
+label_settings = SubResource("LabelSettings_mydtf")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

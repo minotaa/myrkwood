@@ -36,7 +36,7 @@ func refresh_menu() -> void:
 	$UI/Main/Level/Label.text = str(roundi(Game.get_level()))
 	
 	var cost = 1
-	if Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data.has("level"):
+	if Inventories.equipment.get_item_stack(Inventories.equipment.weapon) != null and Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data.has("level"):
 		cost = Inventories.equipment.get_item_stack(Inventories.equipment.weapon).data["level"] + 1
 	
 	if Inventories.equipment.weapon != null:
@@ -71,23 +71,23 @@ func refresh_menu() -> void:
 		var outfit = load("res://assets/sprites/c" + str(1) + "_" + Inventories.equipment.armor.texture_id + ".png")
 		$UI/Main/TextureRect.texture = outfit
 	
-	if Inventories.equipment.consumable != null and Inventories.equipment.get_item_stack(Inventories.equipment.consumable) == null:
-		Inventories.equipment.consumable = null
-	
-	if Inventories.equipment.consumable != null:
-		if Inventories.equipment.get_item_stack(Inventories.equipment.consumable).amount <= 1:
-			$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = false
-		else:
-			$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = true
-			$UI/Main/TabContainer/Loadout/Consumable/Amount.text = "x" + str(Inventories.equipment.get_item_stack(Inventories.equipment.consumable).amount)
-		$UI/Main/TabContainer/Loadout/Consumable/TextureRect.texture = Inventories.equipment.consumable.texture
-		$UI/Main/TabContainer/Loadout/Consumable/Name.text = Inventories.equipment.consumable.name
-		$UI/Main/TabContainer/Loadout/Consumable/Description.text = Inventories.equipment.consumable.description
-	else:
-		$UI/Main/TabContainer/Loadout/Consumable/TextureRect.texture = load("res://assets/sprites/null.png")
-		$UI/Main/TabContainer/Loadout/Consumable/Name.text = "Nothing"
-		$UI/Main/TabContainer/Loadout/Consumable/Description.text = "Nothing is better than something!"
-		$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = false
+	#if Inventories.equipment.consumable != null and Inventories.equipment.get_item_stack(Inventories.equipment.consumable) == null:
+		#Inventories.equipment.consumable = null
+	#
+	#if Inventories.equipment.consumable != null:
+		#if Inventories.equipment.get_item_stack(Inventories.equipment.consumable).amount <= 1:
+			#$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = false
+		#else:
+			#$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = true
+			#$UI/Main/TabContainer/Loadout/Consumable/Amount.text = "x" + str(Inventories.equipment.get_item_stack(Inventories.equipment.consumable).amount)
+		#$UI/Main/TabContainer/Loadout/Consumable/TextureRect.texture = Inventories.equipment.consumable.texture
+		#$UI/Main/TabContainer/Loadout/Consumable/Name.text = Inventories.equipment.consumable.name
+		#$UI/Main/TabContainer/Loadout/Consumable/Description.text = Inventories.equipment.consumable.description
+	#else:
+		#$UI/Main/TabContainer/Loadout/Consumable/TextureRect.texture = load("res://assets/sprites/null.png")
+		#$UI/Main/TabContainer/Loadout/Consumable/Name.text = "Nothing"
+		#$UI/Main/TabContainer/Loadout/Consumable/Description.text = "Nothing is better than something!"
+		#$UI/Main/TabContainer/Loadout/Consumable/Amount.visible = false
 	
 	var stack_resource = preload("res://scenes/item_stack.tscn")
 	for children in $UI/Main/TabContainer/Drops/ScrollContainer/VBoxContainer.get_children():
@@ -207,7 +207,7 @@ func refresh_consumable() -> void:
 
 func _on_back_button_pressed() -> void:
 	$UI/Main/TabContainer/Loadout/Options.visible = false
-	$UI/Main/TabContainer/Loadout/Consumable.visible = true
+	#$UI/Main/TabContainer/Loadout/Consumable.visible = true
 	$UI/Main/TabContainer/Loadout/Armor.visible = true
 	$UI/Main/TabContainer/Loadout/Weapon.visible = true 
 	refresh_menu()
@@ -216,21 +216,21 @@ func _on_weapon_pressed() -> void:
 	$UI/Main/TabContainer/Loadout/Options.visible = true
 	$UI/Main/TabContainer/Loadout/Weapon.visible = false
 	$UI/Main/TabContainer/Loadout/Armor.visible = false
-	$UI/Main/TabContainer/Loadout/Consumable.visible = false
+	#$UI/Main/TabContainer/Loadout/Consumable.visible = false
 	refresh_weapons()
 	
 func _on_armor_pressed() -> void:
 	$UI/Main/TabContainer/Loadout/Options.visible = true
 	$UI/Main/TabContainer/Loadout/Weapon.visible = false
 	$UI/Main/TabContainer/Loadout/Armor.visible = false
-	$UI/Main/TabContainer/Loadout/Consumable.visible = false
+	#$UI/Main/TabContainer/Loadout/Consumable.visible = false
 	refresh_armor()
 
 func _on_consumable_pressed() -> void:
 	$UI/Main/TabContainer/Loadout/Options.visible = true
 	$UI/Main/TabContainer/Loadout/Weapon.visible = false
 	$UI/Main/TabContainer/Loadout/Armor.visible = false
-	$UI/Main/TabContainer/Loadout/Consumable.visible = false
+	#$UI/Main/TabContainer/Loadout/Consumable.visible = false
 	refresh_consumable()
 
 func _on_upgrade_pressed() -> void:

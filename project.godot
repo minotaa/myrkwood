@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Mirkwood"
+config/name="Myrkwood"
 config/description="A little trip down the path"
-config/version="7"
+config/version="10"
 run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)

@@ -5,6 +5,8 @@ var id: int = 0
 var name: String
 var description: String = "The enemy you're trying to look for may not exist..."
 var weight: float
+var kill_point_requirement: int
+var gold: int = 0
 var texture: Texture2D
 
 var health: float = 100.0

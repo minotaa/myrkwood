@@ -72,6 +72,8 @@ func _init() -> void:
 	atlas.atlas = load("res://assets/sprites/items.png")
 	atlas.region = Rect2(64.0, 0.0, 16.0, 16.0)
 	glass_knife.texture = atlas
+	glass_knife.damage = func():
+		return 20.0 + (Game.get_current_weapon_level() * 3)
 	glass_knife.base_damage = 20.0
 	glass_knife.base_attack_speed = -0.125
 	glass_knife.on_hit = func(enemy: Enemy, final_damage: float):
@@ -87,7 +89,7 @@ func _init() -> void:
 				bleed.name = "Bleeding"
 				bleed.texture = load("res://assets/sprites/bleed.png")
 				bleed.on_update = func(enemy: Enemy, effect: EnemyEffect):
-					enemy.health -= 5.0
+					Game.enemy_health -= 5.0
 					print(enemy.name + " bled a little bit")
 				enemy.apply_status_effect(bleed)
 	glass_knife.craftable = true
@@ -229,7 +231,7 @@ func _init() -> void:
 	venomous_axe.id = 13
 	venomous_axe.name = "Venomous Axe"
 	venomous_axe.description = "+{attack} DMG, an upgraded axe that can cause poison on swing."
-	venomous_axe.base_damage = 200
+	venomous_axe.base_damage = 150
 	venomous_axe.base_attack_speed = 1.2
 	venomous_axe.upgrade_message = "Increases duration of Poison by 1s, poison chance by 5%."
 	venomous_axe.max_level = 5
@@ -260,8 +262,8 @@ func _init() -> void:
 				poison.texture = load("res://assets/sprites/poison.png")
 				poison.on_update = func(enemy: Enemy, effect: EnemyEffect):
 					if int(effect.duration) % 2 == 0:
-						var damage = (enemy.health * 0.1)
-						enemy.health -= damage
+						var damage = (Game.enemy_max_health * 0.1)
+						Game.enemy_health -= damage
 						print(enemy.name + " was poisoned a bit (" + str(damage) + ")") 
 				enemy.apply_status_effect(poison)
 	items.append(venomous_axe)

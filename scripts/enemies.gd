@@ -32,6 +32,8 @@ func _ready() -> void:
 	baubles.name = "Baubles"
 	baubles.description = "Colorful Christmas ornamental balls, they've sprouted wings and now want to wreak havoc."
 	baubles.weight = 20.0
+	baubles.kill_point_requirement = 0
+	baubles.gold = 1
 	baubles.health = 50.0
 	baubles.attack_speed = 1.35
 	baubles.attack = 8.0
@@ -56,6 +58,8 @@ func _ready() -> void:
 	slime.name = "Slime"
 	slime.description = "A viscous, sticky blob of a hungry being that would rather just eat you."
 	slime.weight = 30.0
+	slime.kill_point_requirement = 0
+	slime.gold = 5
 	slime.health = 75.0
 	slime.attack_speed = 1.0
 	slime.attack = 20.0
@@ -81,6 +85,8 @@ func _ready() -> void:
 	tadpole.id = 2
 	tadpole.name = "Tadpole"
 	tadpole.description = "Bigger than it looks."
+	tadpole.kill_point_requirement = 25
+	tadpole.gold = 15
 	tadpole.weight = 50.0
 	tadpole.health = 125.0
 	tadpole.attack_speed = 1.25
@@ -108,6 +114,8 @@ func _ready() -> void:
 	fungal_tadpole.name = "Fungal Tadpole"
 	fungal_tadpole.description = "Do you know the Zombie-ant fungus? Yeah, that."
 	fungal_tadpole.weight = 10.0
+	fungal_tadpole.gold = 30
+	fungal_tadpole.kill_point_requirement = 75
 	fungal_tadpole.health = 350.0
 	fungal_tadpole.attack_speed = 2.15
 	fungal_tadpole.attack = 50.0
@@ -123,6 +131,8 @@ func _ready() -> void:
 	minos_fly_trap.id = 4
 	minos_fly_trap.name = "Minos Fly Trap"
 	minos_fly_trap.description = "The protector of the swamp."
+	minos_fly_trap.kill_point_requirement = 100
+	minos_fly_trap.gold = 50
 	minos_fly_trap.weight = 0.005
 	minos_fly_trap.health = 1250.0
 	minos_fly_trap.attack_speed = 4.5
@@ -160,6 +170,8 @@ func _ready() -> void:
 	minos_shroom.name = "Minos Shroom"
 	minos_shroom.description = "Protector of the protector, kind of silly if you think about it."
 	minos_shroom.weight = 100.0
+	minos_shroom.kill_point_requirement = 45
+	minos_shroom.gold = 20
 	minos_shroom.health = 250.0
 	minos_shroom.attack_speed = 4.0
 	minos_shroom.attack = 30.0
@@ -176,6 +188,8 @@ func _ready() -> void:
 	frog.name = "Frog"
 	frog.description = "Grown up version of the tadpole, surprisingly pretty chill."
 	frog.weight = 75.0
+	frog.kill_point_requirement = 65
+	frog.gold = 25
 	frog.health = 400.0
 	frog.attack_speed = 2.25
 	frog.attack = 30.0
@@ -214,6 +228,8 @@ func _ready() -> void:
 	warm_frog.name = "Warm Frog"
 	warm_frog.description = "A frog that comes from warmer climate lands, also is poisonous for some reason."
 	warm_frog.weight = 50.0
+	warm_frog.kill_point_requirement = 125
+	warm_frog.gold = 45
 	warm_frog.health = 400.0
 	warm_frog.attack_speed = 2.0
 	warm_frog.attack = 28.9
@@ -257,6 +273,8 @@ func _ready() -> void:
 	poison_slime.name = "Poison Slime"
 	poison_slime.description = "The jungle has made this slime adept for survival with its poisonous membrane."
 	poison_slime.weight = 75.0
+	poison_slime.kill_point_requirement = 85
+	poison_slime.gold = 50
 	poison_slime.health = 175.0
 	poison_slime.attack_speed = 1.0
 	poison_slime.attack = 20.0
@@ -265,7 +283,7 @@ func _ready() -> void:
 	poison_slime.location = "sea"
 	poison_slime.texture = load("res://assets/sprites/poison_slime.png")
 	poison_slime.on_die = func ():
-		var amount = randi_range(5, 12)
+		var amount = randi_range(6, 12)
 		ToastParty.show({
 			"text": "You also got x" + str(amount) + " Goop!",
 			"bgcolor": Color(0, 0, 0, 0.7),

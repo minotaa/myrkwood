@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxiu4knib3rxv"]
+
+[ext_resource type="Texture2D" uid="uid://b2hels20ykw5r" path="res://assets/sprites/null.png" id="1_vb3fx"]
+[ext_resource type="Script" path="res://scripts/consumable_button.gd" id="2_a8yvf"]
+[ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="2_ifcb8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66ngm"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03edq"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.589096, 0.589096, 0.589095, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.261113, 0.261113, 0.261113, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ni85"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vceff"]
+font = ExtResource("2_ifcb8")
+font_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yahae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7i3o"]
+bg_color = Color(1, 1, 1, 0.639216)
+
+[node name="Consumable" type="Button"]
+texture_filter = 1
+custom_minimum_size = Vector2(192, 192)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7i3o")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_66ngm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_03edq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_22uqi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6ni85")
+icon = ExtResource("1_vb3fx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_a8yvf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -40.0
+offset_right = -11.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "x100"
+label_settings = SubResource("LabelSettings_vceff")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -88.0
+offset_right = 88.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_yahae")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v7i3o")
+fill_mode = 3
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

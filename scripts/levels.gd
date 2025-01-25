@@ -169,3 +169,15 @@ func _ready() -> void:
 		Enemies.get_by_id(8)
 	]
 	levels.append(ten)
+	
+	var eleven = Level.new()
+	eleven.id = 11
+	eleven.name = "Anomura"
+	eleven.enemy_list = [
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(8),
+		Enemies.get_by_id(9)
+	]
+	levels.append(eleven)

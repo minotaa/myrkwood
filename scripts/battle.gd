@@ -9,7 +9,6 @@ var defense: float = Game.get_defense()
 var health_last_fight: float = Game.health
 # Effective_Health = Health * (1 + Defense / 100)
 
-
 var player_alive = true
 var enemy_alive = true
 var melt = false
@@ -283,8 +282,9 @@ func attack_player() -> void:
 		$UI/Main/MagicProgressBar.visible = false
 		$UI/Main/Panel/EnemyHealthProgressBar.visible = false
 		$UI/Main/Panel/EnemyEffects.visible = false
-		$UI/Main/ArcadeFinalScore.visible = true
-		$UI/Main/Revive.visible = true
+		if Game.arcade:
+			$UI/Main/ArcadeFinalScore.visible = true
+			$UI/Main/Revive.visible = true
 		var messages = [
 			"You were never found.", 
 			"You went off the straight path.", 
@@ -361,3 +361,7 @@ func _on_regular_rewards_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	else:
 		get_tree().change_scene_to_file("res://scenes/arcade.tscn")
+
+func _on_revive_pressed() -> void:
+	Game.load_rewarded_ad("ca-app-pub-4596716586585952/9817679682")
+	

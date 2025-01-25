@@ -256,13 +256,13 @@ func _ready() -> void:
 		if not found:
 			if randf() <= 0.3:
 				var poison = Effect.new()
-				poison.duration = 8.0
+				poison.duration = 5.0
 				poison.id = 1
 				poison.name = "Poison"
 				poison.texture = load("res://assets/sprites/poison.png")
 				poison.on_update = func(effect: Effect):
 					if int(effect.duration) % 2 == 0:
-						var damage = (Game.get_max_health() * 0.1)
+						var damage = (Game.get_max_health() * 0.05)
 						Game.health -= damage
 						print("You were poisoned a bit (" + str(damage) + ")") 
 				Game.apply_status_effect(poison)
@@ -283,7 +283,7 @@ func _ready() -> void:
 	poison_slime.location = "sea"
 	poison_slime.texture = load("res://assets/sprites/poison_slime.png")
 	poison_slime.on_die = func ():
-		var amount = randi_range(6, 12)
+		var amount = randi_range(6, 20)
 		ToastParty.show({
 			"text": "You also got x" + str(amount) + " Goop!",
 			"bgcolor": Color(0, 0, 0, 0.7),
@@ -311,15 +311,43 @@ func _ready() -> void:
 				found = true
 		if not found:
 			var poison = Effect.new()
-			poison.duration = 5.0
+			poison.duration = 2.0
 			poison.id = 1
 			poison.name = "Poison"
 			poison.texture = load("res://assets/sprites/poison.png")
 			poison.on_update = func(effect: Effect):
 				#if int(effect.duration) % 2 == 0:
-				var damage = (Game.get_max_health() * 0.1)
+				var damage = (Game.get_max_health() * 0.05)
 				Game.health -= damage
 				print("You were poisoned a bit (" + str(damage) + ")") 
 			Game.apply_status_effect(poison)
 	enemies.append(poison_slime)
+	
+	var shy_crab = Enemy.new()
+	shy_crab.id = 9
+	shy_crab.name = "Shy Crab"
+	shy_crab.description = "A shy but lethal crab."
+	shy_crab.weight = 80.0
+	shy_crab.kill_point_requirement = 125
+	shy_crab.gold = 75
+	shy_crab.health = 100.0
+	shy_crab.defense = 500.0
+	shy_crab.attack_speed = 2.5
+	shy_crab.attack = 100.0
+	shy_crab.exp = 225.0
+	shy_crab.location = "sea"
+	shy_crab.texture = load("res://assets/sprites/shy_crab.png")
+	shy_crab.on_die = func():
+		var amount = randi_range(1, 5)
+		ToastParty.show({
+			"text": "You also got x" + str(amount) + " Pincers!",
+			"bgcolor": Color(0, 0, 0, 0.7),
+			"color": Color(1, 1, 1, 1),
+			"gravity": "bottom",
+			"direction": "center",
+			"text_size": 24
+		})
+		for i in amount:
+			Game.temp_drops_gained.append(Items.get_item_by_id(15))
+	enemies.append(shy_crab)
 	print("enemies added")

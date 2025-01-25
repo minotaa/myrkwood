@@ -237,7 +237,8 @@ func populate_initial_shop_items():
 	shop_items.append(ShopItem.new(ItemStack.new(Items.get_item_by_id(11), 1), 25))
 	shop_items.append(ShopItem.new(ItemStack.new(Items.get_item_by_id(13), 1), 150, true))
 	shop_items.append(ShopItem.new(ItemStack.new(Items.get_item_by_id(14), 1), 100, true))
-
+	shop_items.append(ShopItem.new(ItemStack.new(Items.get_item_by_id(17), 1), 500, true))
+	
 func _ready() -> void:
 	if Game.generated_levels.is_empty():
 		Game.generated_levels.append(generate_level(0))
@@ -246,6 +247,9 @@ func _ready() -> void:
 		print("Generated arcade levels.")
 	if shop_items.is_empty():
 		populate_initial_shop_items()
+	if not Game.started_run:
+		Game.shop_needs_refresh = true
+		Game.arcade_shop_items = []
 	if Game.arcade_shop_items.is_empty() and Game.shop_needs_refresh:
 		Game.shop_needs_refresh = false
 		var available_items = shop_items.duplicate()

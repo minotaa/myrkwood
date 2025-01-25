@@ -200,13 +200,13 @@ func _init() -> void:
 	var medium_healing_potion = Consumable.new()
 	medium_healing_potion.id = 11
 	medium_healing_potion.name = "Medium Healing Potion"
-	medium_healing_potion.description = "Heals +100 HP, 6.5 second cooldown."
+	medium_healing_potion.description = "Heals +100 HP, 4.5 second cooldown."
 	atlas = AtlasTexture.new()
 	atlas.atlas = load("res://assets/sprites/items.png")
 	atlas.region = Rect2(48.0, 0.0, 16.0, 16.0)
 	medium_healing_potion.texture = atlas
 	medium_healing_potion.cooldown = true
-	medium_healing_potion.cooldown_seconds = 6.5
+	medium_healing_potion.cooldown_seconds = 4.5
 	medium_healing_potion.infinite = false
 	medium_healing_potion.craftable = true
 	
@@ -284,4 +284,46 @@ func _init() -> void:
 	bullfrog_armor.min_requirement = [ItemStack.new(get_item_by_id(12), 1)]
 	bullfrog_armor.requirement = [ItemStack.new(get_item_by_id(12), 5), ItemStack.new(get_item_by_id(7), 1),  ItemStack.new(get_item_by_id(6), 100)]
 	items.append(bullfrog_armor)
+	
+	var pincers = ItemType.new()
+	pincers.id = 15
+	pincers.name = "Pincers"
+	pincers.description = "Pincers straight from a crab."
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(240.0, 0.0, 16.0, 16.0)
+	pincers.texture = atlas
+	items.append(pincers)
+	
+	var tempered_exoskeleton = ItemType.new()
+	tempered_exoskeleton.id = 16 
+	tempered_exoskeleton.name = "Tempered Exoskeleton"
+	tempered_exoskeleton.description = "Revitalized crustacean exoskeleton."
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(32.0, 16.0, 16.0, 16.0)
+	tempered_exoskeleton.texture = atlas
+	tempered_exoskeleton.craftable = true
+	tempered_exoskeleton.min_requirement = [ItemStack.new(get_item_by_id(15), 1)]
+	tempered_exoskeleton.requirement = [ItemStack.new(get_item_by_id(15), 1), ItemStack.new(get_item_by_id(3), 5)]
+	items.append(tempered_exoskeleton)
+	
+	var crabby_armor = Armor.new()
+	crabby_armor.id = 17
+	crabby_armor.name = "Carapace Armor"
+	crabby_armor.description = "+300 HP, +200 DEF"
+	crabby_armor.texture_id = "crabby"
+	atlas = AtlasTexture.new()
+	atlas.atlas = load("res://assets/sprites/items.png")
+	atlas.region = Rect2(64.0, 16.0, 16.0, 16.0)
+	crabby_armor.texture = atlas
+	crabby_armor.defense = 200.0
+	crabby_armor.health = 300.0
+	crabby_armor.craftable = true
+	crabby_armor.only_craft_once = true
+	crabby_armor.min_requirement = [ItemStack.new(get_item_by_id(16), 1)]
+	crabby_armor.requirement = [ItemStack.new(get_item_by_id(16), 15)]
+	items.append(crabby_armor)
+	
+	
 	print("items added")

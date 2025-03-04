@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://bo5m3pqwov2tt"]
 
-[ext_resource type="Script" path="res://scripts/title.gd" id="1_wcmpu"]
+[ext_resource type="Script" uid="uid://ba6m5gf0j1sm" path="res://scripts/title.gd" id="1_wcmpu"]
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="2_kd5n6"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="3_o54xh"]
 [ext_resource type="Texture2D" uid="uid://cpntobqu6i7p2" path="res://assets/sprites/checked.png" id="4_b3w7a"]

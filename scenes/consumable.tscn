@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxiu4knib3rxv"]
 
 [ext_resource type="Texture2D" uid="uid://b2hels20ykw5r" path="res://assets/sprites/null.png" id="1_vb3fx"]
-[ext_resource type="Script" path="res://scripts/consumable_button.gd" id="2_a8yvf"]
+[ext_resource type="Script" uid="uid://dmb6hldi6f2cy" path="res://scripts/consumable_button.gd" id="2_a8yvf"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="2_ifcb8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dugii0837nslt"]
 
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="2_7awoi"]
-[ext_resource type="Script" path="res://addons/toastparty/toast_label/ToastLabel.gd" id="3_vwlmp"]
+[ext_resource type="Script" uid="uid://cla77udlg72d5" path="res://addons/toastparty/toast_label/ToastLabel.gd" id="3_vwlmp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyafd"]
 content_margin_left = 32.0

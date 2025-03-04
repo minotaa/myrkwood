@@ -158,21 +158,23 @@ func attack_enemy() -> void:
 		Game.enemies_killed += 1
 		var gold_multiplier = 1
 		if Game.arcade:
-			Game.temp_gold += Game.enemy.gold
 			if Game.game_level.difficulty == 0:
 				Game.kill_points += 3
 				Game.arcade_score += 10
 				Game.gold += Game.enemy.gold
+				Game.temp_gold += Game.enemy.gold
 			elif Game.game_level.difficulty == 1:
 				Game.kill_points += 2
 				Game.arcade_score += 25
 				Game.gold += roundi(Game.enemy.gold * 1.5)
-				gold_multiplier = 1.5
+				Game.temp_gold += roundi(Game.enemy.gold * 1.5)
+				gold_multiplier = 2
 			elif Game.game_level.difficulty == 2:
 				Game.kill_points += 1
 				Game.arcade_score += 50
-				Game.gold += roundi(Game.enemy.gold * 2)
-				gold_multiplier = 2
+				Game.gold += roundi(Game.enemy.gold * 1.5)
+				Game.temp_gold += roundi(Game.enemy.gold * 1.5)
+				gold_multiplier = 3
 		if not Game.arcade:
 			ToastParty.show({
 				"text": "You got " + str(roundi(Game.enemy.exp)) + " XP from this fight!",

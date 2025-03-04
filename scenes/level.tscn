@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://decl6d8bbvaft"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_w7c3h"]
-[ext_resource type="Script" path="res://scripts/level_button.gd" id="2_dvimu"]
+[ext_resource type="Script" uid="uid://btlvqgon0j6fb" path="res://scripts/level_button.gd" id="2_dvimu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi1b0"]
 

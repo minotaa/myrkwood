@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dc51865qsxqe8"]
 
-[ext_resource type="Script" path="res://scripts/item_stack_control.gd" id="1_1eobl"]
+[ext_resource type="Script" uid="uid://cyf8m778b750o" path="res://scripts/item_stack_control.gd" id="1_1eobl"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="2_t2dj6"]
 [ext_resource type="Texture2D" uid="uid://d0mmrbctam71x" path="res://assets/sprites/items.png" id="3_pxcdv"]
 

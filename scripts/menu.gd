@@ -18,6 +18,7 @@ func refresh_menu() -> void:
 		if game_level == null:
 			level_button.icon = dead
 			level_button.disabled = true
+			level_button.text = "More levels coming soon..."
 		elif game_level.id > Game.highest_completed_level:
 			level_button.icon = locked
 			level_button.disabled = true

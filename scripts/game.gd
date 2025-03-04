@@ -268,22 +268,24 @@ func save_game(reason: String):
 			"score": enemies_killed,
 			"category": "enemies_killed"
 		})
-		GameCenter.game_center.post_score({
-			"score": get_level(),
-			"category": "highest_level"
-		})
-		GameCenter.game_center.post_score({
-			"score": highest_completed_level,
-			"category": "stages_progressed"
-		})
+		if not arcade:
+			GameCenter.game_center.post_score({
+				"score": get_level(),
+				"category": "highest_level"
+			})
+			GameCenter.game_center.post_score({
+				"score": highest_completed_level,
+				"category": "stages_progressed"
+			})
 		GameCenter.game_center.post_score({
 			"score": items_crafted,
 			"category": "items_crafted"
 		})
-		GameCenter.game_center.post_score({
-			"score": highest_arcade_score,
-			"category": "highest_endless_score"
-		})
+		if arcade:
+			GameCenter.game_center.post_score({
+				"score": highest_arcade_score,
+				"category": "highest_endless_score"
+			})
 		print("Updated Game Center scores.")
 	if not arcade:
 		var save_file = FileAccess.open("user://game.april", FileAccess.WRITE)

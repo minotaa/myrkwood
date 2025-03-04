@@ -4,6 +4,7 @@ var level_object = preload("res://scenes/arcade_level.tscn")
 
 const DIFFICULTY_TIERS = {0: 0.5, 1: 1.0, 2: 1.5} 
 const DIFFICULTY_NAMES = ["Easy", "Medium", "Hard"]
+const SCENARIOS = [""]
 
 func generate_level(level_tier: int) -> Level:
 	var level = Level.new()
@@ -31,14 +32,13 @@ func generate_enemy(difficulty_multiplier: float) -> Enemy:
 	scaled_enemy.name = base_enemy.name
 	scaled_enemy.description = base_enemy.description
 	scaled_enemy.texture = base_enemy.texture
-	scaled_enemy.health = scale_stat(base_enemy.health, Game.kill_points, 0.2)
+	scaled_enemy.health = scale_stat(base_enemy.health, Game.kill_points, 0.09)
 	scaled_enemy.defense = scale_stat(base_enemy.defense, Game.kill_points, 0.1)
 	scaled_enemy.attack = scale_stat(base_enemy.attack, Game.kill_points, 0.15)
 	scaled_enemy.attack_speed = base_enemy.attack_speed
-	scaled_enemy.gold = scale_stat(base_enemy.gold, difficulty_multiplier, true)
-	scaled_enemy.exp = scale_exp(base_enemy.exp, difficulty_multiplier)
+	scaled_enemy.gold = base_enemy.gold
+	scaled_enemy.exp = base_enemy.exp
 	scaled_enemy.location = base_enemy.location
-
 	return scaled_enemy
 
 func filter_eligible_enemies() -> Array:
@@ -61,9 +61,13 @@ func pick_random_enemy(eligible_enemies: Array) -> Enemy:
 	return eligible_enemies[0]
 
 func scale_stat(base_value: float, kill_points: int, scaling_factor: float) -> float:
-	var scaling_adjustment = 1.0 + (kill_points / 100.0) * scaling_factor
-	if kill_points == 0:
-		scaling_adjustment = 0.45
+	var min_scaling = 0.1
+	var max_scaling = 10.0
+	var scaling_adjustment = lerp(
+		min_scaling,
+		max_scaling,
+		kill_points / (kill_points + 50.0) * scaling_factor
+	)
 	return round(base_value * scaling_adjustment)
 
 func scale_exp(base_exp: float, difficulty_multiplier: float) -> float:

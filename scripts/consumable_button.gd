@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 		$Label.text = "x" + str(Inventories.equipment.get_item_stack(item).amount)
 
 func _ready() -> void:
+	$Timer.stop()
 	print("been added!")
 
 func _on_pressed() -> void:
@@ -19,13 +20,14 @@ func _on_pressed() -> void:
 		if Game.haptics_enabled:
 			Input.vibrate_handheld(25)
 		if Game.sounds_enabled:
-			$"../../../AudioStreamPlayer".get_stream_playback().play_stream(load("res://assets/sounds/powerup.wav"))
+			$"../../../../../AudioStreamPlayer".get_stream_playback().play_stream(load("res://assets/sounds/powerup.wav"))
 		Inventories.equipment.take_item(item, 1)
 		item.on_consume.call()
 		if item.cooldown:
 			$Timer.wait_time = item.cooldown_seconds
 			$Timer.start()
 			$".".disabled = true
+			$ProgressBar.value = 0
 		if Inventories.equipment.get_item_stack(item) == null:
 			item = null
 			$".".visible = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dagg2b75awus6"]
 
-[ext_resource type="Script" path="res://scripts/craft_button.gd" id="1_e3jf6"]
+[ext_resource type="Script" uid="uid://bjxby8o2ceyoj" path="res://scripts/craft_button.gd" id="1_e3jf6"]
 [ext_resource type="Texture2D" uid="uid://d0mmrbctam71x" path="res://assets/sprites/items.png" id="2_e3jf6"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="3_e3jf6"]
 

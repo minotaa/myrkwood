@@ -305,7 +305,7 @@ func _init() -> void:
 	tempered_exoskeleton.texture = atlas
 	tempered_exoskeleton.craftable = true
 	tempered_exoskeleton.min_requirement = [ItemStack.new(get_item_by_id(15), 1)]
-	tempered_exoskeleton.requirement = [ItemStack.new(get_item_by_id(15), 1), ItemStack.new(get_item_by_id(3), 5)]
+	tempered_exoskeleton.requirement = [ItemStack.new(get_item_by_id(15), 5), ItemStack.new(get_item_by_id(3), 5)]
 	items.append(tempered_exoskeleton)
 	
 	var crabby_armor = Armor.new()

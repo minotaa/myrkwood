@@ -1,14 +1,14 @@
 [gd_scene load_steps=39 format=3 uid="uid://fo1x20ewfiw8"]
 
 [ext_resource type="FontFile" uid="uid://bl0f2csh2wd2l" path="res://assets/fonts/DungeonFont.ttf" id="1_2ey2a"]
-[ext_resource type="Script" path="res://scripts/battle.gd" id="1_ogh5i"]
-[ext_resource type="Script" path="res://scripts/battle_ui.gd" id="2_06lu2"]
+[ext_resource type="Script" uid="uid://fedb1gyb71ci" path="res://scripts/battle.gd" id="1_ogh5i"]
+[ext_resource type="Script" uid="uid://cwt6hg1yue00j" path="res://scripts/battle_ui.gd" id="2_06lu2"]
 [ext_resource type="FontFile" uid="uid://dalt11g8b1g2k" path="res://assets/fonts/Kitchen Sink.ttf" id="4_ply01"]
 [ext_resource type="Texture2D" uid="uid://cep5ej2435hik" path="res://assets/minota.png" id="5_mm37a"]
-[ext_resource type="Shader" path="res://scripts/shaders/melt.gdshader" id="5_wwnh4"]
+[ext_resource type="Shader" uid="uid://mlpdpefcr0h3" path="res://scripts/shaders/melt.gdshader" id="5_wwnh4"]
 [ext_resource type="Texture2D" uid="uid://bnxw0e4ir0pg" path="res://assets/sprites/slime.png" id="6_v2rec"]
 [ext_resource type="PackedScene" uid="uid://dxiu4knib3rxv" path="res://scenes/consumable.tscn" id="7_3wf0j"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="7_lmkk5"]
+[ext_resource type="Script" uid="uid://d0miqlbu48hrp" path="res://scripts/camera.gd" id="7_lmkk5"]
 [ext_resource type="Texture2D" uid="uid://8r6702a8yda4" path="res://assets/sprites/back.png" id="8_v7i3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a11u7"]
@@ -595,15 +595,15 @@ text = "Watch an ad to double rewards!"
 [node name="Revive" type="Button" parent="UI/Main"]
 visible = false
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.337
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.337
+anchor_bottom = 0.5
 offset_left = -320.0
-offset_top = 448.64
+offset_top = 228.0
 offset_right = 320.0
-offset_bottom = 536.64
+offset_bottom = 344.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_ply01")
@@ -713,8 +713,8 @@ visible = false
 texture_filter = 1
 position = Vector2(360, 384)
 scale = Vector2(10, 10)
-process_material = SubResource("ParticleProcessMaterial_v7ekf")
 texture = ExtResource("5_mm37a")
+process_material = SubResource("ParticleProcessMaterial_v7ekf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_lmkk5")

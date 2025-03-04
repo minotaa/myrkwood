@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=4 uid="uid://cf8hlvhe2q30a"]
 
-[ext_resource type="Script" path="res://scripts/overworld.gd" id="1_bojfb"]
+[ext_resource type="Script" uid="uid://vt71445af0vs" path="res://scripts/overworld.gd" id="1_bojfb"]
 [ext_resource type="Texture2D" uid="uid://csgvrsuskj3jv" path="res://assets/sprites/tiles.png" id="2_cmcbi"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="3_8vjah"]
+[ext_resource type="Script" uid="uid://dpaovn33nk24n" path="res://scripts/player.gd" id="3_8vjah"]
 [ext_resource type="Texture2D" uid="uid://djovmmulov0lv" path="res://assets/sprites/clementine.png" id="4_pc5yi"]
 [ext_resource type="Texture2D" uid="uid://ct4ijfeuorthh" path="res://assets/sprites/clementine-walk.png" id="5_wg8bs"]
 [ext_resource type="Texture2D" uid="uid://gnqmo2i80h6h" path="res://assets/sprites/clementine-walk-gray.png" id="6_rw5xi"]
